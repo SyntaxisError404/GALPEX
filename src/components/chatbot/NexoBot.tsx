@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNexo } from '../../context/NexoContext';
+import { useAuth } from '../../context/AuthContext';
 import { queryLocalKnowledgeBase } from '../../data/botKnowledge';
 import {
   Bot,
@@ -19,6 +20,8 @@ interface ChatMessage {
 
 export const NexoBot: React.FC = () => {
   const { role } = useNexo();
+  const { currentUser } = useAuth();
+  const firstName = currentUser?.name.split(' ')[0] || '';
   const [isOpen, setIsOpen] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
@@ -28,11 +31,12 @@ export const NexoBot: React.FC = () => {
   const [showKeyModal, setShowKeyModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const initialGreeting = role === 'dueno_galpon' 
-    ? 'Hola Manuel. Detecté que el Lote SKU-8841 de TecnoParts vence en 48h. El Depósito Anti-Abandono de $30 cubre el flete de retorno automático si no retiran a tiempo, protegiendo tu espacio sin pérdidas.'
+  const hi = firstName ? `Hola ${firstName}.` : 'Hola.';
+  const initialGreeting = role === 'dueno_galpon'
+    ? `${hi} Detecté que el Lote SKU-8841 de TecnoParts vence en 48h. El Depósito Anti-Abandono de $30 cubre el flete de retorno automático si no retiran a tiempo, protegiendo tu espacio sin pérdidas.`
     : role === 'transportista'
-    ? 'Hola Pedro. Tienes asignado el despacho #NX-8492 hacia Ferretería El Tornillo en Naguanagua con tarifa garantizada en Escrow ($85 USD). ¿Deseas verificar la ruta o escanear QR de retiro?'
-    : '¡Hola Sofía! Soy tu Copiloto Logístico NexoCarga. Puedes consultarme sobre cotizaciones por paleta, disponibilidad en Castillito o San Diego, o cómo funciona el depósito de garantía en custodia Escrow.';
+    ? `${hi} Tienes asignado el despacho #NX-8492 hacia Ferretería El Tornillo en Naguanagua con tarifa garantizada en Escrow ($85 USD). ¿Deseas verificar la ruta o escanear QR de retiro?`
+    : `${firstName ? '¡Hola ' + firstName + '!' : '¡Hola!'} Soy tu Copiloto Logístico NexoCarga. Puedes consultarme sobre cotizaciones por paleta, disponibilidad en Castillito o San Diego, o cómo funciona el depósito de garantía en custodia Escrow.`;
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {

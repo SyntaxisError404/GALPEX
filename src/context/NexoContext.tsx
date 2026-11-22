@@ -104,9 +104,9 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
 
 const NexoContext = createContext<NexoContextType | undefined>(undefined);
 
-export const NexoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [role, setRoleState] = useState<UserRole>('proveedor');
-  const [activeTab, setActiveTab] = useState<TabId>('explorar');
+export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: UserRole }> = ({ children, initialRole = 'proveedor' }) => {
+  const [role, setRoleState] = useState<UserRole>(initialRole);
+  const [activeTab, setActiveTab] = useState<TabId>(ROLE_TABS[initialRole].home);
 
   // Cambiar de perfil lleva al usuario a la vista principal de ese rol
   // si la pestaña actual no aplica para el nuevo perfil (navegación intuitiva).

@@ -142,7 +142,7 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     categoriesAccepted: ['carga_seca', 'repuestos_ferreteria', 'alimentos_empacados'],
     features: ['Distribución exprés Caracas', 'Control de acceso biométrico', 'Seguridad perimetral armada'],
     securityBadges: ['Blindaje Patrimonial 24/7'],
-    imageUrl: 'https://images.unsplash.com/photo-1565610222536-ef125c59da2c?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
     verifiedOwner: {
       id: 'usr-caracas-yaguara',
       name: 'Alejandro Carrillo',

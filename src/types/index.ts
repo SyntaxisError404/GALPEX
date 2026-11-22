@@ -1,5 +1,15 @@
 export type UserRole = 'proveedor' | 'dueno_galpon' | 'transportista';
 
+// Cuenta de usuario de la app (demo: se guarda en el navegador vía localStorage).
+export interface AppUser {
+  id: string;
+  name: string;
+  company: string;
+  email: string;
+  password: string;
+  role: UserRole;
+}
+
 export type CargoCategory = 
   | 'carga_seca' 
   | 'alimentos_empacados' 

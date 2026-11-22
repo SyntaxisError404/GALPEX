@@ -14,6 +14,9 @@ import {
 } from 'lucide-react';
 import { LegalFooterBanner } from '../layout/LegalFooterBanner';
 
+// Imagen de respaldo si la URL de un galpón no carga (evita tarjetas en negro).
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80';
+
 export const WarehouseCatalog: React.FC = () => {
   const { 
     warehouses, 
@@ -45,6 +48,7 @@ export const WarehouseCatalog: React.FC = () => {
   });
 
   const selectedWh = selectedWarehouseForReservation || filteredWarehouses[0] || warehouses[0];
+  const selectedCompatible = selectedWh.categoriesAccepted.includes(selectedCategory);
 
   // Calculations
   const antiAbandonmentDeposit = 30.00;
@@ -200,13 +204,15 @@ export const WarehouseCatalog: React.FC = () => {
               return (
                 <div
                   key={wh.id}
-                  onClick={() => setSelectedWarehouseForReservation(wh)}
-                  className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col justify-between cursor-pointer group shadow-sm hover:shadow-md ${
+                  onClick={() => { if (compatible) setSelectedWarehouseForReservation(wh); }}
+                  className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col justify-between group shadow-sm ${
+                    compatible ? 'cursor-pointer hover:shadow-md' : 'cursor-not-allowed'
+                  } ${
                     isSelected
                       ? 'border-blue-600 ring-2 ring-blue-600/30'
                       : compatible
                       ? 'border-slate-200/90 hover:border-slate-300'
-                      : 'border-slate-200 opacity-80'
+                      : 'border-slate-200 opacity-60'
                   }`}
                 >
                   {/* Image & Badges */}
@@ -214,6 +220,11 @@ export const WarehouseCatalog: React.FC = () => {
                     <img
                       src={wh.imageUrl}
                       alt={wh.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        const img = e.currentTarget;
+                        if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -301,18 +312,21 @@ export const WarehouseCatalog: React.FC = () => {
                       </div>
 
                       <button
+                        disabled={!compatible}
                         onClick={(e) => {
                           e.stopPropagation();
-                          setSelectedWarehouseForReservation(wh);
+                          if (compatible) setSelectedWarehouseForReservation(wh);
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition shadow-sm ${
-                          isSelected
+                          !compatible
+                            ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            : isSelected
                             ? 'bg-blue-600 text-white shadow-blue-600/30'
                             : 'bg-slate-900 text-white hover:bg-slate-800'
                         }`}
                       >
-                        <span>{isSelected ? 'Seleccionado' : 'Reservar Espacio'}</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
+                        <span>{!compatible ? 'No disponible' : isSelected ? 'Seleccionado' : 'Reservar Espacio'}</span>
+                        {compatible && <ChevronRight className="w-3.5 h-3.5" />}
                       </button>
                     </div>
                   </div>
@@ -440,14 +454,28 @@ export const WarehouseCatalog: React.FC = () => {
               </div>
             </div>
 
+            {/* Aviso si el galpón seleccionado no admite el rubro elegido */}
+            {!selectedCompatible && (
+              <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-[11px] flex items-start gap-1.5">
+                <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                <span>
+                  {selectedWh.name} no admite <strong>{selectedCategory.replace(/_/g, ' ')}</strong>. Selecciona otro galpón compatible para continuar.
+                </span>
+              </div>
+            )}
+
             {/* Confirm & Protect Escrow CTA Button */}
             <button
               onClick={handleConfirmReservation}
-              disabled={isSubmitting}
-              className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition transform active:scale-[0.98]"
+              disabled={isSubmitting || !selectedCompatible}
+              className={`w-full py-3.5 px-4 rounded-xl text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-[0.98] ${
+                selectedCompatible
+                  ? 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30'
+                  : 'bg-slate-300 cursor-not-allowed shadow-none'
+              }`}
             >
               <ShieldCheck className="w-5 h-5 text-white" />
-              <span>{isSubmitting ? 'Procesando Bóveda Escrow...' : 'Confirmar y Proteger Pago en Escrow'}</span>
+              <span>{isSubmitting ? 'Procesando Bóveda Escrow...' : !selectedCompatible ? 'Galpón no compatible' : 'Confirmar y Proteger Pago en Escrow'}</span>
             </button>
 
             {/* Trust disclaimer */}

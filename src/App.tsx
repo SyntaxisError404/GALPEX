@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { NexoProvider, useNexo } from './context/NexoContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthScreen } from './components/auth/AuthScreen';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { WelcomeGuide } from './components/layout/WelcomeGuide';
@@ -67,11 +69,27 @@ const MainAppContent: React.FC = () => {
   );
 };
 
-export function App() {
+// Decide qué mostrar según la sesión: pantalla de login o la app con el rol del usuario.
+const AuthedApp: React.FC = () => {
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+    return <AuthScreen />;
+  }
+
   return (
-    <NexoProvider>
+    // key por usuario: al cambiar de sesión, el estado de la app se reinicia limpio
+    <NexoProvider key={currentUser.id} initialRole={currentUser.role}>
       <MainAppContent />
     </NexoProvider>
+  );
+};
+
+export function App() {
+  return (
+    <AuthProvider>
+      <AuthedApp />
+    </AuthProvider>
   );
 }
 
