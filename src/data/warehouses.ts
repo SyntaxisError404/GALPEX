@@ -12,7 +12,7 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 800,
     availableM2: 320,
     idlePercentage: 40,
-    dailyRatePerPallet: 1.50,
+    dailyRatePerPallet: 0.45, // Tarifa realista: ~$13.50/mes por posición de paleta
     categoriesAccepted: ['carga_seca', 'repuestos_ferreteria'],
     features: ['Cross-docking listo', 'Andén nivelador', 'CCTV HD', 'Montacargas eléctrico'],
     securityBadges: ['Seguridad 24/7 Verificada', 'Póliza Contra Incendio'],
@@ -37,7 +37,7 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 1200,
     availableM2: 520,
     idlePercentage: 65,
-    dailyRatePerPallet: 1.25,
+    dailyRatePerPallet: 0.35, // Tarifa masiva: ~$10.50/mes por posición
     categoriesAccepted: ['carga_seca', 'alimentos_empacados', 'repuestos_ferreteria'],
     features: ['Almacenamiento masivo', '4 Andenes', 'Garita Armada', 'Planta 150kVA'],
     securityBadges: ['Seguridad 24/7 Verificada', 'Vigilancia Privada'],
@@ -62,10 +62,10 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 600,
     availableM2: 180,
     idlePercentage: 25,
-    dailyRatePerPallet: 1.80,
+    dailyRatePerPallet: 0.95, // Cadena de frío (2°C a 8°C): ~$28.50/mes por paleta fría
     temperatureControl: 'Frío 4°C (2°C a 8°C)',
     categoriesAccepted: ['refrigerado', 'alimentos_empacados'],
-    features: ['Refrigeración activa', 'Certificación SACS', '2°C a 8°C', 'Telemetría IoT'],
+    features: ['Refrigeración activa', 'Certificación SACS', '2°C a 8°C', 'Telemetría IoT', 'Planta eléctrica 150 kVA'],
     securityBadges: ['Seguridad 24/7', 'Frío Continuo Respaldado'],
     imageUrl: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80',
     verifiedOwner: {
@@ -88,7 +88,7 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 950,
     availableM2: 410,
     idlePercentage: 55,
-    dailyRatePerPallet: 1.30,
+    dailyRatePerPallet: 0.38, // Tarifa competitiva: ~$11.40/mes
     categoriesAccepted: ['carga_seca', 'repuestos_ferreteria'],
     features: ['Patios de maniobra amplios', 'Rampa para gandolas', 'Control de plagas al día'],
     securityBadges: ['Seguridad 24/7 Verificada'],
@@ -113,7 +113,7 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 1100,
     availableM2: 450,
     idlePercentage: 48,
-    dailyRatePerPallet: 1.40,
+    dailyRatePerPallet: 0.40, // ~$12.00/mes
     categoriesAccepted: ['carga_seca', 'alimentos_empacados', 'repuestos_ferreteria'],
     features: ['Racks para 350 paletas', '3 Muelles de carga', 'Circuito cerrado digital'],
     securityBadges: ['Seguridad 24/7 Verificada'],
@@ -138,11 +138,11 @@ export const INITIAL_WAREHOUSES: Warehouse[] = [
     totalM2: 1500,
     availableM2: 480,
     idlePercentage: 35,
-    dailyRatePerPallet: 1.90,
+    dailyRatePerPallet: 0.55, // Zona capitalina: ~$16.50/mes
     categoriesAccepted: ['carga_seca', 'repuestos_ferreteria', 'alimentos_empacados'],
     features: ['Distribución exprés Caracas', 'Control de acceso biométrico', 'Seguridad perimetral armada'],
     securityBadges: ['Blindaje Patrimonial 24/7'],
-    imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1565610222536-ef125c59da2c?auto=format&fit=crop&w=800&q=80',
     verifiedOwner: {
       id: 'usr-caracas-yaguara',
       name: 'Alejandro Carrillo',

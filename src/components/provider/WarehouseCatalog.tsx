@@ -66,7 +66,7 @@ export const WarehouseCatalog: React.FC = () => {
   const selectedCompatible = selectedWh.categoriesAccepted.includes(selectedCategory);
 
   // Calculations
-  const antiAbandonmentDeposit = 30.00;
+  const antiAbandonmentDeposit = 25.00;
   const storageCost = estimatedPallets * contractDays * selectedWh.dailyRatePerPallet;
   const totalEscrowUsd = storageCost + antiAbandonmentDeposit;
   const totalEscrowVes = totalEscrowUsd * bcvRate;

@@ -68,8 +68,8 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     timestamp: '2026-11-20 10:14 AM',
     concept: 'Custodia Almacenaje SKU-8841 (TecnoParts C.A.)',
     referenceCode: 'ESC-VE-99214',
-    amountUsd: 145.00,
-    amountVes: 145.00 * 36.45,
+    amountUsd: 51.70,
+    amountVes: 51.70 * 36.45,
     type: 'deposito',
     beneficiary: 'Fideicomiso KARGON',
     method: 'pago_movil_c2p',
@@ -80,8 +80,8 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     timestamp: '2026-11-18 03:40 PM',
     concept: 'Garantía Anti-Abandono Lote SKU-9204',
     referenceCode: 'ESC-GA-30198',
-    amountUsd: 30.00,
-    amountVes: 30.00 * 36.45,
+    amountUsd: 25.00,
+    amountVes: 25.00 * 36.45,
     type: 'deposito',
     beneficiary: 'Fideicomiso KARGON',
     method: 'transferencia_ves',
@@ -92,8 +92,8 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     timestamp: '2026-11-15 11:20 AM',
     concept: 'Despacho #NX-8102 - Liquidación Galpón Castillito',
     referenceCode: 'LIQ-GAL-8102',
-    amountUsd: 67.50,
-    amountVes: 67.50 * 36.45,
+    amountUsd: 12.00,
+    amountVes: 12.00 * 36.45,
     type: 'liberacion_galpon',
     beneficiary: 'Manuel Mendoza (Logística Castillito)',
     method: 'transferencia_ves',
@@ -104,8 +104,8 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     timestamp: '2026-11-15 11:20 AM',
     concept: 'Despacho #NX-8102 - Liquidación Chofer Verificado',
     referenceCode: 'LIQ-TR-8102',
-    amountUsd: 76.50,
-    amountVes: 76.50 * 36.45,
+    amountUsd: 31.50,
+    amountVes: 31.50 * 36.45,
     type: 'liberacion_flete',
     beneficiary: 'Pedro Alvarado (Trans-Carabobo Express)',
     method: 'pago_movil_c2p',
@@ -208,7 +208,7 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
   }, []);
 
   // Total escrow balance calculation
-  const totalEscrowBalance = 450.00 + (dispatch.status !== 'entregado' ? dispatch.financials.totalEscrow : 0);
+  const totalEscrowBalance = 120.00 + (dispatch.status !== 'entregado' ? dispatch.financials.totalEscrow : 0);
 
   // Action: Reserve warehouse & emit digital reception receipt
   const reserveWarehouse = ({
@@ -226,7 +226,7 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
     sku: string;
     productName: string;
   }) => {
-    const antiAbandonment = 30.00;
+    const antiAbandonment = 25.00;
     const totalCost = (pallets * days * warehouse.dailyRatePerPallet) + antiAbandonment;
     const now = new Date();
     const formattedDate = now.toISOString().split('T')[0];
@@ -465,10 +465,10 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
       status: 'espera_retiro',
       escrowStatus: 'fondos_retenidos',
       financials: {
-        warehouseFee: 40.00,
-        carrierFreightFee: 75.00,
-        platformCommission: 11.50,
-        totalEscrow: 126.50,
+        warehouseFee: 15.00,
+        carrierFreightFee: 35.00,
+        platformCommission: 5.00,
+        totalEscrow: 55.00,
         antiAbandonmentRefund: lot.antiAbandonmentDeposit
       },
       step1WarehouseCheckIn: {

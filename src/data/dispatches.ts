@@ -44,11 +44,11 @@ export const INITIAL_DISPATCH: Dispatch = {
   status: 'espera_retiro',
   escrowStatus: 'fondos_retenidos',
   financials: {
-    warehouseFee: 45.00,
-    carrierFreightFee: 85.00,
-    platformCommission: 14.50,
-    totalEscrow: 145.00,
-    antiAbandonmentRefund: 30.00
+    warehouseFee: 12.00,        // 4 paletas x 6 días x $0.45/día + manipuleo
+    carrierFreightFee: 35.00,   // Flete local metropolitano en Valencia (NPR 4.5 Ton)
+    platformCommission: 4.70,   // 10% de comisión operativa
+    totalEscrow: 51.70,         // Total custodiado creíble y pagable
+    antiAbandonmentRefund: 25.00
   },
   step1WarehouseCheckIn: {
     completed: true,
@@ -66,5 +66,5 @@ export const INITIAL_DISPATCH: Dispatch = {
     completed: false,
     deliveryQrHash: 'f4b18c092a194918e2bc99812aa319087bcdaef189421098efab4910287123bc'
   },
-  routeNotes: 'Autopista del Este • Peaje Guacara | RED NEXO ACTIVA'
+  routeNotes: 'Autopista del Este • Peaje Guacara | RED KARGON ACTIVA'
 };

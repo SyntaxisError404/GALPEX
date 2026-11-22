@@ -84,7 +84,7 @@ export const OwnerDashboard: React.FC = () => {
             className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-2 shadow-md transition"
           >
             <DollarSign className="w-4 h-4 text-emerald-400" />
-            <span>Retirar Escrow ($1,840.00)</span>
+            <span>Retirar Escrow ($960.00)</span>
           </button>
 
           <button
@@ -133,7 +133,7 @@ export const OwnerDashboard: React.FC = () => {
             </div>
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono">
-            $1,840.00
+            $960.00
           </div>
           <div className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1 mt-1">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
@@ -176,10 +176,10 @@ export const OwnerDashboard: React.FC = () => {
             </div>
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono">
-            $360.00
+            $300.00
           </div>
           <div className="text-[11px] text-slate-600 mt-1">
-            12 depósitos de $30 en custodia
+            12 depósitos de $25 en custodia
           </div>
           <div className="text-[10px] text-emerald-600 font-bold mt-1">
             Riesgo calculado: 0% Mora Histórica
@@ -401,9 +401,9 @@ export const OwnerDashboard: React.FC = () => {
 
             <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
               <div className="text-xs text-emerald-800 font-semibold">Saldo Liquidable Inmediato</div>
-              <div className="text-3xl font-black text-emerald-950 font-mono mt-1">$1,840.00 USD</div>
+              <div className="text-3xl font-black text-emerald-950 font-mono mt-1">$960.00 USD</div>
               <div className="text-xs text-emerald-700 mt-1 font-mono">
-                ≈ {(1840.00 * bcvRate).toLocaleString('es-VE', { maximumFractionDigits: 2 })} VES (Tasa BCV {bcvRate.toFixed(2)})
+                ≈ {(960.00 * bcvRate).toLocaleString('es-VE', { maximumFractionDigits: 2 })} VES (Tasa BCV {bcvRate.toFixed(2)})
               </div>
             </div>
 

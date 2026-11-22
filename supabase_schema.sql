@@ -136,23 +136,23 @@ VALUES
   ('a3333333-3333-3333-3333-333333333333', 'Pedro Alvarado', 'Trans-Carabobo Express S.R.L.', 'transportista', 'Valencia', '+58 412-5558912', true, 5.0)
 ON CONFLICT (id) DO NOTHING;
 
--- 5.2. Almacenes en Zonas Industriales Reales
+-- 5.2. Almacenes en Zonas Industriales Reales (Tarifas de mercado Venezuela: $0.35 - $0.95/día)
 INSERT INTO almacenes (id, dueno_id, nombre_galpon, ciudad, zona_industrial, direccion, m2_totales, m2_disponibles, porcentaje_ocioso, tarifa_diaria_paleta, categoria_aceptada, imagen_url)
 VALUES 
-  ('b1111111-1111-1111-1111-111111111111', 'a2222222-2222-2222-2222-222222222222', 'Galpón Modular Castillito Norte', 'Valencia', 'Z.I. Castillito', 'Av. Este-Oeste 3, Galpón B-12', 800, 320, 40, 1.50, 'repuestos_ferreteria', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80'),
-  ('b2222222-2222-2222-2222-222222222222', 'a2222222-2222-2222-2222-222222222222', 'Centro Logístico Big Low Park', 'San Diego', 'San Diego - ARC', 'Intercomunal San Diego frente Terminal', 1200, 520, 65, 1.25, 'carga_seca', 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80'),
-  ('b3333333-3333-3333-3333-333333333333', 'a2222222-2222-2222-2222-222222222222', 'Almacenes Frigoríficos La Ensenada', 'Puerto Cabello', 'Puerto Cabello - Muelle', 'Carretera Nacional Morón Km 4', 600, 180, 25, 1.80, 'refrigerado', 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80')
+  ('b1111111-1111-1111-1111-111111111111', 'a2222222-2222-2222-2222-222222222222', 'Galpón Modular Castillito Norte', 'Valencia', 'Z.I. Castillito', 'Av. Este-Oeste 3, Galpón B-12', 800, 320, 40, 0.45, 'repuestos_ferreteria', 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80'),
+  ('b2222222-2222-2222-2222-222222222222', 'a2222222-2222-2222-2222-222222222222', 'Centro Logístico Big Low Park', 'San Diego', 'San Diego - ARC', 'Intercomunal San Diego frente Terminal', 1200, 520, 65, 0.35, 'carga_seca', 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80'),
+  ('b3333333-3333-3333-3333-333333333333', 'a2222222-2222-2222-2222-222222222222', 'Almacenes Frigoríficos La Ensenada', 'Puerto Cabello', 'Puerto Cabello - Muelle', 'Carretera Nacional Morón Km 4', 600, 180, 25, 0.95, 'refrigerado', 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80')
 ON CONFLICT (id) DO NOTHING;
 
 -- 5.3. Inventario Depositado
 INSERT INTO inventario_depositado (id, almacen_id, proveedor_id, sku_producto, lote_codigo, cantidad_paletas, cantidad_cajas, categoria, dias_contratados, dias_restantes, deposito_garantia_usd, guia_sada, hash_criptografico, estado)
 VALUES
-  ('c1111111-1111-1111-1111-111111111111', 'b2222222-2222-2222-2222-222222222222', 'a1111111-1111-1111-1111-111111111111', 'SKU-8841', 'Lote Ind: Elec-09', 14, 140, 'repuestos_ferreteria', 15, 2, 30.00, 'SADA-VE-99214', '0x9f4a...41bc', 'vence_pronto'),
-  ('c2222222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222', 'a1111111-1111-1111-1111-111111111111', 'SKU-9204', 'Lote Ind: Alim-44', 28, 320, 'alimentos_empacados', 30, 18, 30.00, 'SICA-VE-88412', '0x3c71...88ab', 'almacenado')
+  ('c1111111-1111-1111-1111-111111111111', 'b2222222-2222-2222-2222-222222222222', 'a1111111-1111-1111-1111-111111111111', 'SKU-8841', 'Lote Ind: Elec-09', 14, 140, 'repuestos_ferreteria', 15, 2, 25.00, 'SADA-VE-99214', '0x9f4a...41bc', 'vence_pronto'),
+  ('c2222222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222', 'a1111111-1111-1111-1111-111111111111', 'SKU-9204', 'Lote Ind: Alim-44', 28, 320, 'alimentos_empacados', 30, 18, 25.00, 'SICA-VE-88412', '0x3c71...88ab', 'almacenado')
 ON CONFLICT (id) DO NOTHING;
 
--- 5.4. Despacho Activo #NX-8492
+-- 5.4. Despacho Activo #NX-8492 (Flete local NPR metropolitano + Almacenaje 4 paletas)
 INSERT INTO despachos (id, numero_despacho, inventario_id, transportista_id, destino_nombre, destino_direccion, destino_ciudad, costo_almacenaje_usd, costo_flete_usd, comision_app_usd, monto_total_escrow_usd, qr_hash_retiro, qr_hash_entrega, qr_retiro_escaneado, qr_entrega_escaneado, estado_escrow)
 VALUES
-  ('d1111111-1111-1111-1111-111111111111', '#NX-8492', 'c1111111-1111-1111-1111-111111111111', 'a3333333-3333-3333-3333-333333333333', 'Ferretería El Tornillo C.A.', 'Av. Universidad, C.C. Naguanagua Plaza', 'Naguanagua, Edo. Carabobo', 45.00, 85.00, 14.50, 145.00, '8f4a2c27091e4bca12ef9038ba9812cc9120deba19e481bfd84920199182d91e', 'f4b18c092a194918e2bc99812aa319087bcdaef189421098efab4910287123bc', false, false, 'fondos_retenidos')
+  ('d1111111-1111-1111-1111-111111111111', '#NX-8492', 'c1111111-1111-1111-1111-111111111111', 'a3333333-3333-3333-3333-333333333333', 'Ferretería El Tornillo C.A.', 'Av. Universidad, C.C. Naguanagua Plaza', 'Naguanagua, Edo. Carabobo', 12.00, 35.00, 4.70, 51.70, '8f4a2c27091e4bca12ef9038ba9812cc9120deba19e481bfd84920199182d91e', 'f4b18c092a194918e2bc99812aa319087bcdaef189421098efab4910287123bc', false, false, 'fondos_retenidos')
 ON CONFLICT (id) DO NOTHING;
