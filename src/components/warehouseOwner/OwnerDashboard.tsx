@@ -65,7 +65,7 @@ export const OwnerDashboard: React.FC = () => {
             Monetización & Ocupación
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Control de custodias, rendimiento por metro cuadrado y garantías de liquidación activa.
+            Control de custodias y rendimiento de tu galpón.
           </p>
         </div>
 
@@ -196,7 +196,7 @@ export const OwnerDashboard: React.FC = () => {
               Mi Inventario & Control de Galpón
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Monitoreo en tiempo real de estancias, depósitos de respaldo y vencimientos.
+              Estancias, depósitos y vencimientos en tiempo real.
             </p>
           </div>
 
@@ -358,7 +358,7 @@ export const OwnerDashboard: React.FC = () => {
               Blindaje Legal Automatizado
             </h3>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-              Contratos inteligentes avalados por la legislación de depósito mercantil vigente en Venezuela. Las actas de recepción con firma criptográfica y foto eliminan disputas de conteo o mermas preexistentes.
+              Actas de recepción con firma criptográfica y foto que eliminan disputas de conteo o mermas.
             </p>
           </div>
         </div>
@@ -369,10 +369,10 @@ export const OwnerDashboard: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xs font-bold text-slate-900">
-              Flete de Respaldo Inmediato (Cláusula Anti-Abandono)
+              Flete de Respaldo (Anti-Abandono)
             </h3>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-              Si se supera el plazo límite contratado, transportistas aliados recogen la carga descontando del fondo de mora de $30.00 USD, desalojando tus metros cuadrados sin pérdidas para el galpón.
+              Al vencer el plazo, la carga regresa usando el depósito de $30, liberando tu espacio sin pérdidas.
             </p>
           </div>
         </div>

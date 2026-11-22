@@ -39,16 +39,7 @@ export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModa
   return (
     <header className="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-40 select-none">
       {/* Top micro bar for Hackathon indicator & BCV */}
-      <div className="bg-slate-950/80 px-4 py-1.5 border-b border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-semibold border border-blue-500/20">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-            HACKATÓN VALENVALLEY 2026
-          </span>
-          <span className="hidden sm:inline text-slate-500">•</span>
-          <span className="hidden sm:inline text-slate-300 font-medium">Logística & Cadena de Suministro B2B</span>
-        </div>
-
+      <div className="bg-slate-950/80 px-4 py-1.5 border-b border-slate-800/80 flex flex-wrap items-center justify-end text-xs text-slate-400 gap-2">
         <div className="flex items-center gap-4 text-xs">
           {isCloudSynced && (
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20">

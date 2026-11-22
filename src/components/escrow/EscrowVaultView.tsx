@@ -37,7 +37,7 @@ export const EscrowVaultView: React.FC = () => {
             </span>
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Los fondos nunca se liquidan hasta que ambas partes validen el doble escaneo QR de entrega conforme.
+            Los fondos se liberan solo tras el doble escaneo QR de entrega.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export const EscrowVaultView: React.FC = () => {
           </div>
 
           <p className="text-xs text-slate-500 leading-relaxed">
-            Todas las operaciones se cotizan en USD y se liquidan conforme a la tasa BCV oficial en el momento exacto del escaneo QR final.
+            Operaciones en USD, liquidadas a la tasa BCV oficial.
           </p>
 
           <div className="space-y-3">

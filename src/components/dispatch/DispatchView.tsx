@@ -181,7 +181,7 @@ export const DispatchView: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-600 leading-relaxed">
-              El conductor Pedro Alvarado debe escanear el QR #1 del Galpón para deslindar la responsabilidad del almacén y activar el monitoreo satelital en ruta directa a Naguanagua.
+              El conductor escanea el QR #1 para asumir la custodia y activar el monitoreo satelital.
             </p>
 
             {/* Simulación Button Step 2 */}
@@ -262,7 +262,7 @@ export const DispatchView: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-600 leading-relaxed">
-              El receptor comercial presentará su QR dinámico de recepción. Al coincidir las claves en el nodo NexoCarga, se firma la conformidad y se desencadena la dispersión de los ${dispatch.financials.totalEscrow.toFixed(2)} Escrow.
+              Al escanear el QR del receptor se confirma la entrega y se dispersan los ${dispatch.financials.totalEscrow.toFixed(2)} del Escrow.
             </p>
 
             {/* Action button step 3 */}

@@ -171,10 +171,10 @@ export const WarehouseCatalog: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-extrabold text-slate-900 tracking-tight">
-                Galpones Verificados con Espacio Fraccional
+                Galpones Verificados
               </h2>
               <p className="text-xs text-slate-500">
-                Reserva bajo demanda con pagos protegidos en custodia y tarifas por paleta/día.
+                Reserva por paleta y día, con pago protegido.
               </p>
             </div>
 
@@ -338,11 +338,8 @@ export const WarehouseCatalog: React.FC = () => {
 
             <div>
               <h3 className="text-base font-extrabold text-slate-900">
-                Resumen de Reserva Seleccionada
+                Resumen de Reserva
               </h3>
-              <p className="text-xs text-slate-500">
-                Bóveda de custodia protegida por contrato mercantil.
-              </p>
             </div>
 
             {/* Selected Warehouse Info */}
@@ -457,7 +454,7 @@ export const WarehouseCatalog: React.FC = () => {
             <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px] text-slate-500 leading-relaxed flex items-start gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <span>
-                <strong>Custodia Garantizada:</strong> Fondos retenidos de forma segura hasta validación de entrega por código QR en el portón del almacén. El dueño no recibe el desembolso sin tu confirmación satelital y física.
+                <strong>Custodia Garantizada:</strong> los fondos se liberan solo al validar la entrega con el QR.
               </span>
             </div>
 

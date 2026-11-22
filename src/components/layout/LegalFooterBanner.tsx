@@ -16,7 +16,7 @@ export const LegalFooterBanner: React.FC = () => {
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
-            Términos alineados al <strong>Código de Comercio de Venezuela</strong> y <strong>Ley de Almacenes Generales de Depósito</strong>. Garantía total ante siniestros con pólizas endosadas, salvaguardando derechos patrimoniales tanto del depositante como del operador del galpón.
+            Alineado al <strong>Código de Comercio</strong> y la <strong>Ley de Almacenes Generales de Depósito</strong>, con pólizas que protegen a ambas partes.
           </p>
         </div>
       </div>
