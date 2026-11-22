@@ -76,6 +76,11 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
     'Galpón en óptimas condiciones, techo de acerolit sin goteras, piso de concreto pulido para montacargas, portón corredizo de 5m con acceso directo para gandolas.'
   );
 
+  // Fotos de comprobación técnica (auditoría anti-mentiras)
+  const [cctvProofPhoto, setCctvProofPhoto] = useState<string>('https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=400&q=80');
+  const [roofProofPhoto, setRoofProofPhoto] = useState<string>('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80');
+  const [showVerificationInfo, setShowVerificationInfo] = useState<boolean>(true);
+
   // Tipos de mercancía aceptada
   const [selectedCategories, setSelectedCategories] = useState<CargoCategory[]>([
     'carga_seca',
@@ -516,6 +521,112 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
                 placeholder="ej. Galpón limpio, altura de 8 metros, patio de maniobra amplio donde gira una gandola sin problema, portón eléctrico..."
                 className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-xs text-slate-900 focus:ring-2 focus:ring-emerald-500"
               />
+            </div>
+
+            {/* SECCIÓN DE VERIFICACIÓN ANTI-FRAUDE / FOTOS DE RESPALDO */}
+            <div className="p-4 rounded-xl bg-slate-900 text-white space-y-3 border border-slate-800">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <h5 className="font-black text-xs text-white">
+                      Fotos de Comprobación Técnica (Revisión de Seguridad)
+                    </h5>
+                    <p className="text-[11px] text-slate-400">
+                      Sube o confirma fotos reales de tu sistema de cámaras y el estado del techo:
+                    </p>
+                  </div>
+                </div>
+                <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shrink-0">
+                  Auditado
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                {/* Foto 1: Cámaras */}
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="font-bold text-slate-200 flex items-center gap-1.5">
+                      <Video className="w-3.5 h-3.5 text-cyan-400" />
+                      1. Monitor de Cámaras CCTV
+                    </span>
+                    <span className="text-[9px] text-emerald-400 font-bold">Verificado</span>
+                  </div>
+                  <div className="h-24 rounded-lg overflow-hidden border border-slate-800 relative group">
+                    <img src={cctvProofPhoto} alt="Monitor CCTV" className="w-full h-full object-cover" />
+                    <label className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer text-[10px] font-bold text-white gap-1">
+                      <Upload className="w-3.5 h-3.5" /> Cambiar foto
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const r = new FileReader();
+                            r.onload = () => { if (typeof r.result === 'string') setCctvProofPhoto(r.result); };
+                            r.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  <div className="text-[10px] text-slate-400">Foto del monitor o DVR grabando en vivo</div>
+                </div>
+
+                {/* Foto 2: Techo y piso */}
+                <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="font-bold text-slate-200 flex items-center gap-1.5">
+                      <Camera className="w-3.5 h-3.5 text-amber-400" />
+                      2. Foto Interior (Techo / Piso)
+                    </span>
+                    <span className="text-[9px] text-emerald-400 font-bold">Verificado</span>
+                  </div>
+                  <div className="h-24 rounded-lg overflow-hidden border border-slate-800 relative group">
+                    <img src={roofProofPhoto} alt="Techo y piso" className="w-full h-full object-cover" />
+                    <label className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer text-[10px] font-bold text-white gap-1">
+                      <Upload className="w-3.5 h-3.5" /> Cambiar foto
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const r = new FileReader();
+                            r.onload = () => { if (typeof r.result === 'string') setRoofProofPhoto(r.result); };
+                            r.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  <div className="text-[10px] text-slate-400">Demuestra que no hay filtraciones ni roturas</div>
+                </div>
+              </div>
+
+              {/* Los 3 Candados de Verificación KARGON */}
+              <div className="p-3 rounded-lg bg-white/5 border border-white/10 space-y-1.5 text-[11px]">
+                <div className="font-extrabold text-amber-300 flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>¿Por qué nadie puede mentir al publicar en KARGON?</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[10px] text-slate-300">
+                  <div className="bg-black/30 p-2 rounded border border-white/5">
+                    <strong className="text-white block mb-0.5">1. Revisión en Terreno:</strong>
+                    El transportista certificado valida físicamente las cámaras y el techo con fotos en la primera descarga.
+                  </div>
+                  <div className="bg-black/30 p-2 rounded border border-white/5">
+                    <strong className="text-white block mb-0.5">2. Responsabilidad Legal:</strong>
+                    El galpón firma como Depositario Mercantil con su RIF bajo el Código de Comercio venezolano (Art. 535).
+                  </div>
+                  <div className="bg-black/30 p-2 rounded border border-white/5">
+                    <strong className="text-white block mb-0.5">3. Pago Protegido:</strong>
+                    Los fondos del alquiler se transfieren solo si la carga se mantiene segura sin quejas ni daños.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
