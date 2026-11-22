@@ -31,7 +31,7 @@ export const ClientTrackingView: React.FC = () => {
   // Valor REAL del QR #2 de recepción que el receptor muestra al chofer para liberar el Escrow.
   const qr2Value = `https://syntaxiserror404.github.io/KARGON/?recepcion=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&hash=${dispatch.step3ClientDelivery.deliveryQrHash}`;
 
-  // Datos del chofer asignado (demo conectado al transportista de KARGON)
+  // Datos del chofer asignado (demo conectado al transportista de GALPEX)
   const driver = {
     name: 'Pedro Alvarado',
     ci: 'V-16.829.102',
@@ -55,7 +55,7 @@ export const ClientTrackingView: React.FC = () => {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hola ${driver.name}, te contacto desde la app KARGON como receptor de la carga (Guía ${dispatch.sadaGuide || 'SADA-VE-2026-9941'}). ¿A qué altura de la vía vienes para tener listo el portón y los caleteros para la descarga?`
+    `Hola ${driver.name}, te contacto desde la app GALPEX como receptor de la carga (Guía ${dispatch.sadaGuide || 'SADA-VE-2026-9941'}). ¿A qué altura de la vía vienes para tener listo el portón y los caleteros para la descarga?`
   );
 
   return (
@@ -201,7 +201,7 @@ export const ClientTrackingView: React.FC = () => {
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Transportista Asignado</span>
               <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Verificado KARGON
+                <CheckCircle2 className="w-3.5 h-3.5" /> Verificado GALPEX
               </span>
             </div>
 

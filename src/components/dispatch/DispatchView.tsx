@@ -447,7 +447,7 @@ export const DispatchView: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-500">
-              Fondos bajo resguardo seguro en fideicomiso KARGON. Al confirmar el segundo escaneo QR, se dispersan automáticamente:
+              Fondos bajo resguardo seguro en fideicomiso GALPEX. Al confirmar el segundo escaneo QR, se dispersan automáticamente:
             </p>
 
             {/* Split breakdown */}
@@ -463,7 +463,7 @@ export const DispatchView: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50">
-                <span className="text-slate-600">Comisión Plataforma KARGON (10%)</span>
+                <span className="text-slate-600">Comisión Plataforma GALPEX (10%)</span>
                 <strong className="text-slate-900 font-mono">${dispatch.financials.platformCommission.toFixed(2)} USD</strong>
               </div>
             </div>

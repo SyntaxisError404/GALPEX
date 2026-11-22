@@ -1,11 +1,11 @@
-# KARGON — Red de Almacenamiento Bajo Demanda, Cross-Docking y Transporte Verificado
+# GALPEX — Red de Almacenamiento Bajo Demanda, Cross-Docking y Transporte Verificado
 
 Proyecto Integral de Ingeniería Logística y Cadena de Suministro B2B.
 
 ## 🚀 Propuesta de Valor y Problema Resuelto
 De acuerdo con **Conindustria**, más del **45% de la capacidad instalada y galpones** en las zonas industriales de Venezuela (Valencia, San Diego, Los Guayos, Maracay, Caracas) se encuentran ociosos. Paralelamente, miles de proveedores e importadores no pueden expandirse regionalmente debido a las barreras del alquiler tradicional (contratos de 6 a 12 meses forzosos, fianzas elevadas, costos fijos de vigilancia y muelles).
 
-**KARGON** conecta galpones con capacidad ociosa fraccional con proveedores comerciales bajo esquema **Pay-as-you-go** (por paleta y por día), asegurando el despacho local en menos de 24 horas mediante transportistas verificados bajo **4 Candados de Seguridad** y pagos retenidos en **Smart Escrow**.
+**GALPEX** conecta galpones con capacidad ociosa fraccional con proveedores comerciales bajo esquema **Pay-as-you-go** (por paleta y por día), asegurando el despacho local en menos de 24 horas mediante transportistas verificados bajo **4 Candados de Seguridad** y pagos retenidos en **Smart Escrow**.
 
 ---
 

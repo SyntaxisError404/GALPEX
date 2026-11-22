@@ -64,7 +64,7 @@ export const QrCodeImage: React.FC<QrCodeImageProps> = ({
       src={src}
       width={size}
       height={size}
-      alt="Código QR de custodia KARGON"
+      alt="Código QR de custodia GALPEX"
       className={className}
     />
   );

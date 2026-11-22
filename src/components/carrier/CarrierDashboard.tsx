@@ -43,7 +43,7 @@ export const CarrierDashboard: React.FC = () => {
   };
 
   const whatsappClientMessage = encodeURIComponent(
-    `Hola, te escribe Pedro Alvarado de KARGON (Camión NPR placas ${carrier.licensePlate}). Estoy en ruta con tu despacho (${dispatch.cargoSummary}). ¿Tienes el portón y montacargas listos para la descarga?`
+    `Hola, te escribe Pedro Alvarado de GALPEX (Camión NPR placas ${carrier.licensePlate}). Estoy en ruta con tu despacho (${dispatch.cargoSummary}). ¿Tienes el portón y montacargas listos para la descarga?`
   );
 
   return (

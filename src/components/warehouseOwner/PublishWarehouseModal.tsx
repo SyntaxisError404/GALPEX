@@ -403,7 +403,7 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
                     </span>
                   </div>
                   <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                    Para prevenir robos, extravíos y darle total tranquilidad a los clientes, KARGON <strong>solo acepta galpones que tengan cámaras de seguridad activas las 24 horas</strong>.
+                    Para prevenir robos, extravíos y darle total tranquilidad a los clientes, GALPEX <strong>solo acepta galpones que tengan cámaras de seguridad activas las 24 horas</strong>.
                   </p>
                 </div>
               </div>
@@ -629,11 +629,11 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
                 </div>
               </div>
 
-              {/* Los 3 Candados de Verificación KARGON */}
+              {/* Los 3 Candados de Verificación GALPEX */}
               <div className="p-3 rounded-lg bg-white/5 border border-white/10 space-y-1.5 text-[11px]">
                 <div className="font-extrabold text-amber-300 flex items-center gap-1.5">
                   <Lock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                  <span>¿Por qué nadie puede mentir al publicar en KARGON?</span>
+                  <span>¿Por qué nadie puede mentir al publicar en GALPEX?</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[10px] text-slate-300">
                   <div className="bg-black/30 p-2 rounded border border-white/5">
@@ -873,7 +873,7 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
               </span>
 
               <p className="text-[11px] text-amber-900/90 leading-relaxed">
-                El dinero del alquiler <strong>no se cobra por adelantado en mano</strong>. Queda protegido en la <strong>cuenta de custodia KARGON</strong> y se te transfiere a medida que la estancia transcurre sin problemas. Si se comprueba falsedad en tus declaraciones (ej. goteras ocultas que dañen la carga o falta de cámaras prometidas), <strong>tus fondos acumulados serán retenidos automáticamente para indemnizar al cliente</strong>.
+                El dinero del alquiler <strong>no se cobra por adelantado en mano</strong>. Queda protegido en la <strong>cuenta de custodia GALPEX</strong> y se te transfiere a medida que la estancia transcurre sin problemas. Si se comprueba falsedad en tus declaraciones (ej. goteras ocultas que dañen la carga o falta de cámaras prometidas), <strong>tus fondos acumulados serán retenidos automáticamente para indemnizar al cliente</strong>.
               </p>
 
               <label className="flex items-start gap-2.5 pt-1.5 cursor-pointer">
@@ -976,7 +976,7 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
                   Cláusula Tercera — Régimen de Cuenta Custodia y Retención Preventiva (Punto 4):
                 </h5>
                 <p className="text-[11px] text-slate-600">
-                  Los fondos pagados por los clientes no constituyen pago anticipado irrevocable. Quedan retenidos en la Bóveda de Custodia KARGON y se transfieren al Depositario según transcurra el resguardo. Si se constata falsedad en la declaración de estado físico (ej. filtraciones de lluvia activas) o se reportan daños a las paletas, <strong>KARGON queda irrevocablemente autorizada para retener y congelar los saldos del Depositario</strong> a fin de indemnizar inmediatamente al propietario de la carga.
+                  Los fondos pagados por los clientes no constituyen pago anticipado irrevocable. Quedan retenidos en la Bóveda de Custodia GALPEX y se transfieren al Depositario según transcurra el resguardo. Si se constata falsedad en la declaración de estado físico (ej. filtraciones de lluvia activas) o se reportan daños a las paletas, <strong>GALPEX queda irrevocablemente autorizada para retener y congelar los saldos del Depositario</strong> a fin de indemnizar inmediatamente al propietario de la carga.
                 </p>
               </div>
 

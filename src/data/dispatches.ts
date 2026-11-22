@@ -66,5 +66,5 @@ export const INITIAL_DISPATCH: Dispatch = {
     completed: false,
     deliveryQrHash: 'f4b18c092a194918e2bc99812aa319087bcdaef189421098efab4910287123bc'
   },
-  routeNotes: 'Autopista del Este • Peaje Guacara | RED KARGON ACTIVA'
+  routeNotes: 'Autopista del Este • Peaje Guacara | RED GALPEX ACTIVA'
 };

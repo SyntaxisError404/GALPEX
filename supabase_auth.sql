@@ -1,5 +1,5 @@
 -- ==============================================================================
--- KARGON — Base de datos de AUTENTICACIÓN (login / registro con roles)
+-- GALPEX — Base de datos de AUTENTICACIÓN (login / registro con roles)
 -- ==============================================================================
 -- Cómo usarlo:
 --   1. Entra a tu proyecto en https://app.supabase.com

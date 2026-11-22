@@ -34,7 +34,7 @@ const ARC_ROUTE_COORDINATES: [number, number][] = [
   [10.03132, -67.48301] // Destino Cliente: Cagua Zona Industrial (Coordenada exacta OSM)
 ];
 
-// Coordenadas geoespaciales de los galpones de la red KARGON
+// Coordenadas geoespaciales de los galpones de la red GALPEX
 const WAREHOUSE_COORDINATES: Record<string, { lat: number; lng: number; tag: string }> = {
   'wh-castillito-norte': { lat: 10.1872, lng: -67.9543, tag: 'Galpón Castillito Norte (Valencia)' },
   'wh-big-low-san-diego': { lat: 10.1985, lng: -67.9250, tag: 'Centro Big Low Park (San Diego)' },
@@ -182,7 +182,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
     // estilo Command Center se logra con un filtro CSS sobre la capa de tiles
     // (ver .kargon-map .leaflet-tile-pane en index.css), evitando depender de CARTO.
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors • KARGON Satelital',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors • GALPEX Satelital',
       maxZoom: 19,
     }).addTo(map);
 
@@ -271,7 +271,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
 
     truckMarker.bindPopup(`
       <div style="font-family: sans-serif; font-size: 12px; color: #1e293b;">
-        <div style="font-weight: 800; font-size: 13px; color: #1d4ed8;">Flete Activo KARGON #DSP-2026-9941</div>
+        <div style="font-weight: 800; font-size: 13px; color: #1d4ed8;">Flete Activo GALPEX #DSP-2026-9941</div>
         <div style="color: #475569; margin-top: 2px;">Chofer: <strong>Pedro Alvarado</strong></div>
         <div style="color: #475569;">Vehículo: <strong>Chevrolet NPR 4.5T (Placas A38CD2K)</strong></div>
         <div style="margin-top: 4px; padding: 4px; background: #eff6ff; border-radius: 4px; color: #1e40af; font-size: 10px;">

@@ -123,7 +123,7 @@ export const OwnerDashboard: React.FC = () => {
               </span>
             </div>
             <p className="text-[11px] text-slate-300 mt-1 leading-relaxed max-w-3xl">
-              <strong>Garantía de Confianza:</strong> Bajo el <strong>Art. 535 del Código de Comercio</strong>, este galpón asume responsabilidad legal por la custodia de la mercancía. Los clientes pagan a la cuenta de custodia KARGON y los fondos se liberan al completarse el resguardo. Si se detectara una gotera o daño imputable al galpón, <strong>los fondos se retienen de forma preventiva para indemnizar al cliente</strong>.
+              <strong>Garantía de Confianza:</strong> Bajo el <strong>Art. 535 del Código de Comercio</strong>, este galpón asume responsabilidad legal por la custodia de la mercancía. Los clientes pagan a la cuenta de custodia GALPEX y los fondos se liberan al completarse el resguardo. Si se detectara una gotera o daño imputable al galpón, <strong>los fondos se retienen de forma preventiva para indemnizar al cliente</strong>.
             </p>
           </div>
         </div>
@@ -497,7 +497,7 @@ export const OwnerDashboard: React.FC = () => {
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 font-mono">
                 <div className="flex justify-between"><span>Total Facturado por Alquiler:</span><strong>$1,840.00 USD</strong></div>
                 <div className="flex justify-between text-slate-500"><span>Equivalente en Bolívares (BCV):</span><strong>{(1840 * bcvRate).toLocaleString()} Bs.</strong></div>
-                <div className="flex justify-between"><span>Comisión KARGON (10%):</span><strong>$184.00 USD</strong></div>
+                <div className="flex justify-between"><span>Comisión GALPEX (10%):</span><strong>$184.00 USD</strong></div>
                 <div className="flex justify-between"><span>Retención de Impuestos (2%):</span><strong>$36.80 USD</strong></div>
               </div>
 
@@ -563,10 +563,10 @@ export const OwnerDashboard: React.FC = () => {
               <div className="space-y-2">
                 <h5 className="font-extrabold text-slate-900 text-xs flex items-center gap-1.5">
                   <DollarSign className="w-4 h-4 text-amber-600" />
-                  Punto 4: ¿Cómo protege KARGON el dinero si el galpón mintió? (Retención de Fondos)
+                  Punto 4: ¿Cómo protege GALPEX el dinero si el galpón mintió? (Retención de Fondos)
                 </h5>
                 <p className="text-[11px] text-slate-600">
-                  El cliente <strong>no paga dinero por adelantado en mano al dueño</strong>. Los fondos están en la <strong>cuenta de custodia KARGON</strong>:
+                  El cliente <strong>no paga dinero por adelantado en mano al dueño</strong>. Los fondos están en la <strong>cuenta de custodia GALPEX</strong>:
                 </p>
                 <ul className="list-disc pl-5 text-[11px] text-slate-600 space-y-1">
                   <li><strong>Liberación escalonada:</strong> El dueño cobra conforme pasan los días y se confirma que no hay incidencias.</li>
@@ -577,7 +577,7 @@ export const OwnerDashboard: React.FC = () => {
 
               <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Mecanismo contractual activo en cada orden de custodia generada en KARGON.</span>
+                <span>Mecanismo contractual activo en cada orden de custodia generada en GALPEX.</span>
               </div>
             </div>
 

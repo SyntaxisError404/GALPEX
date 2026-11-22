@@ -75,7 +75,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
               <Layers className="w-5 h-5" />
             </div>
             <div className="leading-tight">
-              <div className="font-extrabold tracking-tight">KAR<span className="text-blue-400">GON</span></div>
+              <div className="font-extrabold tracking-tight">GAL<span className="text-blue-400">PEX</span></div>
               <div className="text-[9px] uppercase font-bold text-slate-500 tracking-widest">Venezuela</div>
             </div>
             <span className="hidden lg:inline text-[9px] font-bold text-blue-300 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded tracking-wider">
@@ -188,7 +188,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
               </span>
             ))}
           </div>
-          <span className="text-slate-600">© 2026 KARGON Venezuela S.A.</span>
+          <span className="text-slate-600">© 2026 GALPEX Venezuela S.A.</span>
         </div>
       </footer>
     </div>

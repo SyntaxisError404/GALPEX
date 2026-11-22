@@ -128,7 +128,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             <Layers className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-xl font-extrabold text-white tracking-tight">KARGON</div>
+            <div className="text-xl font-extrabold text-white tracking-tight">GALPEX</div>
             <div className="text-[10px] uppercase font-bold text-blue-400 tracking-wider">Logística B2B · Venezuela</div>
           </div>
         </div>
@@ -227,7 +227,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1.5">¿Qué rol usarás en KARGON?</label>
+                  <label className="text-xs font-bold text-slate-700 block mb-1.5">¿Qué rol usarás en GALPEX?</label>
                   <div className="grid grid-cols-1 gap-2">
                     {ROLE_OPTIONS.map(opt => {
                       const Icon = opt.icon;

@@ -64,13 +64,13 @@ const IncompatibleWarehouseModal: React.FC<{
       return {
         headline: 'Recinto Frigorífico Especializado Exclusivo',
         description: `Este galpón opera bajo hermeticidad biosegura para alimentos perecederos. No cuenta con andenes para piezas automotrices pesadas ni autorización para almacenamiento de metales o ferretería industrial.`,
-        normative: 'Protocolos de Inocuidad y Segregación Absoluta KARGON Smart Escrow.'
+        normative: 'Protocolos de Inocuidad y Segregación Absoluta GALPEX Smart Escrow.'
       };
     }
     return {
       headline: 'Rubro Fuera de Certificación Técnica',
       description: `Las características constructivas, pólizas de seguros y licencias de este recinto no contemplan el resguardo de "${targetName}".`,
-      normative: 'Cláusula 4 del Contrato Marco de Depósito Mercantil KARGON.'
+      normative: 'Cláusula 4 del Contrato Marco de Depósito Mercantil GALPEX.'
     };
   };
 
@@ -444,7 +444,7 @@ export const WarehouseCatalog: React.FC = () => {
                   </div>
                   <p className="text-[11px] text-slate-300 mt-0.5">
                     Tu carga declarada es <strong className="text-white capitalize">{formatCategoryName(cargoProfile.productType)}</strong>.
-                    KARGON aplica reglas de <strong>Cero Contaminación Cruzada</strong>.
+                    GALPEX aplica reglas de <strong>Cero Contaminación Cruzada</strong>.
                   </p>
                 </div>
               </div>
@@ -873,7 +873,7 @@ export const WarehouseCatalog: React.FC = () => {
                   <strong>{selectedWh.name}</strong> no está habilitado para <strong>{cargoProfile?.productName || formatCategoryName(selectedCategory)}</strong>.
                 </p>
                 <p className="text-[10px] text-red-700 leading-tight">
-                  KARGON Smart Escrow no permite constituir depósitos en garantía para recintos incompatibles para evitar siniestros de contaminación y rechazos en inspección física.
+                  GALPEX Smart Escrow no permite constituir depósitos en garantía para recintos incompatibles para evitar siniestros de contaminación y rechazos en inspección física.
                 </p>
                 <button
                   type="button"

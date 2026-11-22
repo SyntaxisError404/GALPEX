@@ -72,7 +72,7 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     amountUsd: 51.70,
     amountVes: 51.70 * 36.45,
     type: 'deposito',
-    beneficiary: 'Fideicomiso KARGON',
+    beneficiary: 'Fideicomiso GALPEX',
     method: 'pago_movil_c2p',
     status: 'retenido'
   },
@@ -84,7 +84,7 @@ const INITIAL_ESCROW_TXS: EscrowTransaction[] = [
     amountUsd: 25.00,
     amountVes: 25.00 * 36.45,
     type: 'deposito',
-    beneficiary: 'Fideicomiso KARGON',
+    beneficiary: 'Fideicomiso GALPEX',
     method: 'transferencia_ves',
     status: 'retenido'
   },
@@ -283,7 +283,7 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
       amountUsd: totalCost,
       amountVes: totalCost * bcvRate,
       type: 'deposito',
-      beneficiary: 'Fideicomiso KARGON',
+      beneficiary: 'Fideicomiso GALPEX',
       method: 'pago_movil_c2p',
       status: 'retenido'
     };
@@ -383,12 +383,12 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
     const txPlatform: EscrowTransaction = {
       id: `tx-disp-nexo-${Date.now()}`,
       timestamp: timeStr,
-      concept: `Comisión KARGON (10%) Despacho ${dispatch.dispatchNumber}`,
+      concept: `Comisión GALPEX (10%) Despacho ${dispatch.dispatchNumber}`,
       referenceCode: `COMM-NX-${Math.floor(10000 + Math.random() * 90000)}`,
       amountUsd: dispatch.financials.platformCommission,
       amountVes: dispatch.financials.platformCommission * bcvRate,
       type: 'comision_nexo',
-      beneficiary: 'KARGON Operaciones C.A.',
+      beneficiary: 'GALPEX Operaciones C.A.',
       method: 'transferencia_ves',
       status: 'liquidado'
     };
@@ -488,7 +488,7 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
         completed: false,
         deliveryQrHash: `f4b18c0${Math.random().toString(16).substring(2, 20)}23bc`
       },
-      routeNotes: 'Ruta Directa Carabobo Central | Monitoreo Satelital KARGON'
+      routeNotes: 'Ruta Directa Carabobo Central | Monitoreo Satelital GALPEX'
     };
 
     setDispatch(newDisp);

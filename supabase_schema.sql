@@ -1,6 +1,6 @@
 -- ==============================================================================
--- KARGON: Esquema Relacional SQL Completo + Datos Semilla (Seed Data)
--- Proyecto KARGON: Logística & Cadena de Suministro B2B
+-- GALPEX: Esquema Relacional SQL Completo + Datos Semilla (Seed Data)
+-- Proyecto GALPEX: Logística & Cadena de Suministro B2B
 -- Compatible con Supabase (PostgreSQL 15+)
 -- ==============================================================================
 

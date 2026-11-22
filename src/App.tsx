@@ -103,7 +103,7 @@ const AuthedApp: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#0a1128] text-slate-300">
         <div className="flex items-center gap-2 text-sm">
           <span className="w-4 h-4 rounded-full border-2 border-slate-600 border-t-blue-400 animate-spin"></span>
-          <span>Cargando KARGON...</span>
+          <span>Cargando GALPEX...</span>
         </div>
       </div>
     );
