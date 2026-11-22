@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNexo } from '../../context/NexoContext';
 import { OpenStreetMapTracking } from '../map/OpenStreetMapTracking';
+import { CustodyStepper } from '../dispatch/CustodyComponents';
 import {
   Truck,
   ShieldCheck,
@@ -82,7 +83,7 @@ export const CarrierDashboard: React.FC = () => {
                   NIVEL ORO • 5.0 ★
                 </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
-                  ID: KRG-TR-8492
+                  ID: GLX-TR-8492
                 </span>
               </div>
 
@@ -126,7 +127,7 @@ export const CarrierDashboard: React.FC = () => {
                 onClick={() => setShowWithdrawModal(true)}
                 className="mt-1.5 text-[10px] font-black text-cyan-300 hover:text-cyan-200 flex items-center gap-1 transition"
               >
-                <span>⚡ Pago Móvil C2P Inmediato</span>
+                <span>Retirar por Pago Móvil</span>
                 <ChevronRight className="w-3 h-3" />
               </button>
             </div>
@@ -169,6 +170,11 @@ export const CarrierDashboard: React.FC = () => {
           </div>
         </div>
 
+        {/* Progreso de la cadena de custodia */}
+        <div className="rounded-xl bg-slate-950/60 border border-slate-800 p-4">
+          <CustodyStepper dispatch={dispatch} variant="dark" />
+        </div>
+
         {/* Nodos de Navegación: Origen ➔ Destino */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
@@ -177,7 +183,7 @@ export const CarrierDashboard: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-bold text-blue-400">
                 <MapPin className="w-4 h-4 text-blue-400" />
-                <span>PUNTO A: RETIRO DE MERCANCÍA</span>
+                <span>Punto A · Retiro en galpón</span>
               </div>
               <span className={`text-[10px] px-2 py-0.5 rounded font-extrabold uppercase ${
                 isStep2Done ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
@@ -197,7 +203,7 @@ export const CarrierDashboard: React.FC = () => {
                 className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-0.5"
               >
                 <QrCode className="w-4 h-4 text-cyan-300" />
-                <span>Escanear QR #1 en Portón del Galpón</span>
+                <span>Escanear QR #1 del galpón</span>
               </button>
             ) : (
               <div className="p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
@@ -212,7 +218,7 @@ export const CarrierDashboard: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-bold text-purple-400">
                 <MapPin className="w-4 h-4 text-purple-400" />
-                <span>PUNTO B: ENTREGA COMERCIAL</span>
+                <span>Punto B · Entrega al cliente</span>
               </div>
               <span className={`text-[10px] px-2 py-0.5 rounded font-extrabold uppercase ${
                 isStep3Done ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-slate-800 text-slate-400 border border-slate-700'
@@ -233,11 +239,11 @@ export const CarrierDashboard: React.FC = () => {
                   className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition transform hover:-translate-y-0.5"
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>Escanear QR #2 de Entrega Conforme</span>
+                  <span>Escanear QR #2 del cliente</span>
                 </button>
 
                 <a
-                  href={`https://wa.me/584249182390?text=${whatsappClientMessage}`}
+                  href={`https://wa.me/${dispatch.destination.contactPhone.replace(/\D/g, '')}?text=${whatsappClientMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 text-xs font-bold flex items-center justify-center gap-1.5 transition"

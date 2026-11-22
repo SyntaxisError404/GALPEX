@@ -273,7 +273,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
       <div style="font-family: sans-serif; font-size: 12px; color: #1e293b;">
         <div style="font-weight: 800; font-size: 13px; color: #1d4ed8;">Flete Activo GALPEX #DSP-2026-9941</div>
         <div style="color: #475569; margin-top: 2px;">Chofer: <strong>Pedro Alvarado</strong></div>
-        <div style="color: #475569;">Vehículo: <strong>Chevrolet NPR 4.5T (Placas A38CD2K)</strong></div>
+        <div style="color: #475569;">Vehículo: <strong>Chevrolet NPR 4.5T (Placas A82BK1V)</strong></div>
         <div style="margin-top: 4px; padding: 4px; background: #eff6ff; border-radius: 4px; color: #1e40af; font-size: 10px;">
           Telemetría GPS enlazada por red celular 4G
         </div>
