@@ -34,7 +34,7 @@ export const DispatchView: React.FC = () => {
   const isStep3Completed = step3.completed;
 
   // Valor REAL codificado en el QR #1 de custodia (verificable al escanear).
-  const qr1Value = `https://syntaxiserror404.github.io/KARGON/?custodia=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&guia=${encodeURIComponent(dispatch.sadaGuide)}&hash=${step2.pickupQrHash}`;
+  const qr1Value = `https://syntaxiserror404.github.io/GALPEX/?custodia=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&guia=${encodeURIComponent(dispatch.sadaGuide)}&hash=${step2.pickupQrHash}`;
   const qr1HashShort = `${step2.pickupQrHash.slice(0, 7)}...${step2.pickupQrHash.slice(-4)}`;
 
   return (

@@ -29,7 +29,7 @@ export const ClientTrackingView: React.FC = () => {
   });
 
   // Valor REAL del QR #2 de recepción que el receptor muestra al chofer para liberar el Escrow.
-  const qr2Value = `https://syntaxiserror404.github.io/KARGON/?recepcion=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&hash=${dispatch.step3ClientDelivery.deliveryQrHash}`;
+  const qr2Value = `https://syntaxiserror404.github.io/GALPEX/?recepcion=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&hash=${dispatch.step3ClientDelivery.deliveryQrHash}`;
 
   // Datos del chofer asignado (demo conectado al transportista de GALPEX)
   const driver = {
