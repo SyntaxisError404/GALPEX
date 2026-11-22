@@ -170,8 +170,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
             {mode === 'login' ? (
               <form onSubmit={handleLogin} className="space-y-3.5">
-                <Field icon={Mail} label="Correo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" />
-                <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="••••••••" />
+                <Field icon={Mail} label="Correo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" maxLength={60} sanitize={sanitizers.email} inputMode="email" />
+                <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="••••••••" maxLength={32} />
                 <button
                   type="submit"
                   disabled={busy}
@@ -209,21 +209,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               </form>
             ) : (
               <form onSubmit={handleRegister} className="space-y-3.5">
-                <Field icon={Building2} label="Empresa o Comercio (Razón Social)" value={company} onChange={setCompany} placeholder="ej. Ferretería El Tornillo C.A." />
-                
+                <Field icon={Building2} label="Empresa o Comercio (Razón Social)" value={company} onChange={setCompany} placeholder="ej. Ferretería El Tornillo C.A." maxLength={60} />
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <Field icon={FileSpreadsheet} label="RIF de la Empresa" value={rif} onChange={setRif} placeholder="ej. J-31098234-9" />
-                  <Field icon={Phone} label="Teléfono / WhatsApp" value={phone} onChange={setPhone} placeholder="ej. +58 414-2391092" />
+                  <Field icon={FileSpreadsheet} label="RIF de la Empresa" value={rif} onChange={setRif} placeholder="ej. J-31098234-9" maxLength={12} sanitize={sanitizers.rif} />
+                  <Field icon={Phone} label="Teléfono / WhatsApp" value={phone} onChange={setPhone} placeholder="ej. +58 414-2391092" maxLength={20} sanitize={sanitizers.phone} inputMode="tel" />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <Field icon={User} label="Representante Legal" value={legalRepName} onChange={setLegalRepName} placeholder="ej. Manuel Mendoza" />
-                  <Field icon={ShieldCheck} label="Cédula de Identidad" value={legalRepCi} onChange={setLegalRepCi} placeholder="ej. V-14.829.102" />
+                  <Field icon={User} label="Representante Legal" value={legalRepName} onChange={setLegalRepName} placeholder="ej. Manuel Mendoza" maxLength={40} sanitize={sanitizers.letters} />
+                  <Field icon={ShieldCheck} label="Cédula de Identidad" value={legalRepCi} onChange={setLegalRepCi} placeholder="ej. V-14.829.102" maxLength={12} sanitize={sanitizers.cedula} />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <Field icon={Mail} label="Correo Corporativo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" />
-                  <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
+                  <Field icon={Mail} label="Correo Corporativo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" maxLength={60} sanitize={sanitizers.email} inputMode="email" />
+                  <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" maxLength={32} />
                 </div>
 
                 <div>
@@ -283,7 +283,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   );
 };
 
-// Campo de formulario reutilizable con ícono
+// Sanitizadores de entrada por tipo de campo (filtran caracteres no permitidos al escribir).
+const sanitizers = {
+  // Solo letras (incluye acentos/ñ), espacios y signos de nombres.
+  letters: (v: string) => v.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s.'-]/g, ''),
+  // RIF: letra inicial (J/V/E/G/P/C...), números y guion. En mayúsculas.
+  rif: (v: string) => v.toUpperCase().replace(/[^A-Z0-9-]/g, ''),
+  // Cédula: letra inicial (V/E/J), números, puntos y guion. En mayúsculas.
+  cedula: (v: string) => v.toUpperCase().replace(/[^A-Z0-9.-]/g, ''),
+  // Teléfono: solo números y símbolos telefónicos.
+  phone: (v: string) => v.replace(/[^0-9+\-\s()]/g, ''),
+  // Correo: sin espacios.
+  email: (v: string) => v.replace(/\s/g, '')
+};
+
+// Campo de formulario reutilizable con ícono, con máximo de caracteres y filtro opcional.
 const Field: React.FC<{
   icon: typeof Mail;
   label: string;
@@ -291,18 +305,30 @@ const Field: React.FC<{
   onChange: (v: string) => void;
   type?: string;
   placeholder?: string;
-}> = ({ icon: Icon, label, value, onChange, type = 'text', placeholder }) => (
-  <div>
-    <label className="text-xs font-bold text-slate-700 block mb-1">{label}</label>
-    <div className="relative">
-      <Icon className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+  maxLength?: number;
+  sanitize?: (v: string) => string;
+  inputMode?: 'text' | 'numeric' | 'tel' | 'email';
+}> = ({ icon: Icon, label, value, onChange, type = 'text', placeholder, maxLength, sanitize, inputMode }) => {
+  const handleChange = (raw: string) => {
+    let v = sanitize ? sanitize(raw) : raw;
+    if (maxLength && v.length > maxLength) v = v.slice(0, maxLength);
+    onChange(v);
+  };
+  return (
+    <div>
+      <label className="text-xs font-bold text-slate-700 block mb-1">{label}</label>
+      <div className="relative">
+        <Icon className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => handleChange(e.target.value)}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          inputMode={inputMode}
+          className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
