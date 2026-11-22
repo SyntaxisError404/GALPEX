@@ -214,7 +214,11 @@ export const AuthScreen: React.FC = () => {
 
         <div className="flex items-center justify-center gap-1.5 mt-4 text-[11px] text-slate-500">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Demo: tus datos se guardan solo en este navegador.</span>
+          <span>
+            {usesSupabase
+              ? 'Tus credenciales se protegen con cifrado en Supabase.'
+              : 'Demo: tus datos se guardan solo en este navegador.'}
+          </span>
         </div>
       </div>
     </div>
