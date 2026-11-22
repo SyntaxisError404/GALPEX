@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNexo } from '../../context/NexoContext';
+import { OpenStreetMapTracking } from '../map/OpenStreetMapTracking';
 import {
   Truck,
   MapPin,
@@ -111,69 +112,24 @@ export const ClientTrackingView: React.FC = () => {
         
         {/* Columna Izquierda (2 cols): Mapa de Rastreo y Estado de Ruta */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Card de Ruta GPS en Vivo */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 overflow-hidden">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <h2 className="text-sm font-extrabold text-slate-900">Rastreo Satelital del Flete</h2>
-                  <p className="text-xs text-slate-500">Actualizado vía GPS celular del transportista hace 1 minuto</p>
-                </div>
-              </div>
-              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
-                GPS Activo
-              </span>
-            </div>
-
-            {/* Simulación visual de mapa y progreso */}
-            <div className="relative rounded-xl bg-slate-900 p-5 text-white overflow-hidden mb-5">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                {/* Origen */}
-                <div className="text-center md:text-left">
-                  <span className="text-[10px] uppercase font-bold text-slate-400">Punto de Origen</span>
-                  <div className="font-extrabold text-sm text-slate-100 flex items-center gap-1.5 mt-0.5">
-                    <Building2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    Galpón Castillito Norte (Valencia)
-                  </div>
-                  <div className="text-[11px] text-slate-400">Salida: 09:15 AM · Precinto SADA #9841</div>
-                </div>
-
-                {/* Indicador de progreso intermedio */}
-                <div className="flex-1 max-w-xs w-full px-2 text-center">
-                  <div className="text-[11px] font-bold text-amber-300 mb-1">
-                    {delivered ? 'Ruta Completada' : 'Aprox. 14 km restantes (Autopista Regional)'}
-                  </div>
-                  <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
-                    <div 
-                      className={`h-full transition-all duration-500 ${delivered ? 'w-full bg-emerald-500' : 'w-4/5 bg-gradient-to-r from-blue-500 to-amber-400 animate-pulse'}`}
-                    ></div>
-                  </div>
-                  <div className="flex justify-between text-[10px] text-slate-400 mt-1">
-                    <span>Peaje Guacara</span>
-                    <span className="font-bold text-white">65 km/h</span>
-                    <span>Destino</span>
-                  </div>
-                </div>
-
-                {/* Destino */}
-                <div className="text-center md:text-right">
-                  <span className="text-[10px] uppercase font-bold text-slate-400">Tu Almacén / Tienda</span>
-                  <div className="font-extrabold text-sm text-purple-300 flex items-center justify-center md:justify-end gap-1.5 mt-0.5">
-                    <MapPin className="w-4 h-4 text-purple-400 shrink-0" />
-                    {currentUser?.company || 'Ferretería El Tornillo'}
-                  </div>
-                  <div className="text-[11px] text-slate-400">Zona Ind. Maracay / Valencia</div>
-                </div>
+          {/* Card de Ruta GPS con OpenStreetMap en Vivo */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-blue-600" />
+                  <span>Rastreo Satelital en Tiempo Real (OpenStreetMap)</span>
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Ruta en vivo Valencia ➔ San Diego ➔ Guacara ➔ Maracay ➔ Cagua con telemetría de camión vectorial.
+                </p>
               </div>
             </div>
 
-            {/* Checkpoints de custodia */}
+            {/* Mapa Interactivo Leaflet / OpenStreetMap */}
+            <OpenStreetMapTracking mode="client" height="420px" />
+
+            {/* Checkpoints de custodia legal */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
                 <span className="text-slate-500 block text-[11px]">Precinto de Seguridad SADA:</span>

@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNexo } from '../../context/NexoContext';
+import { OpenStreetMapTracking } from '../map/OpenStreetMapTracking';
 import {
   ShieldCheck,
   QrCode,
   CheckCircle2,
   MapPin,
   ArrowRight,
-  Award
+  Award,
+  Navigation
 } from 'lucide-react';
 
 export const CarrierDashboard: React.FC = () => {
@@ -197,6 +199,23 @@ export const CarrierDashboard: React.FC = () => {
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
+      </div>
+
+      {/* Mapa OpenStreetMap Satelital con Ruta y Galpones de la Región Central */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+              <Navigation className="w-4 h-4 text-blue-600" />
+              <span>Ruta de Flete y Red de Galpones en OpenStreetMap</span>
+            </h2>
+            <p className="text-xs text-slate-500">
+              Visualiza en vivo la ubicación de tu camión sobre la ARC y los galpones verificados en Carabobo, Aragua y Caracas.
+            </p>
+          </div>
+        </div>
+
+        <OpenStreetMapTracking mode="carrier" height="460px" />
       </div>
     </div>
   );
