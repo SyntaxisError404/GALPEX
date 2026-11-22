@@ -11,7 +11,8 @@ import {
   Scale,
   UserCheck,
   CheckCheck,
-  Maximize2
+  Maximize2,
+  Truck
 } from 'lucide-react';
 
 export const DispatchView: React.FC = () => {
@@ -305,13 +306,9 @@ export const DispatchView: React.FC = () => {
           <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="relative">
-                  <img
-                    src={dispatch.assignedCarrier.avatarUrl}
-                    alt={dispatch.assignedCarrier.name}
-                    className="w-12 h-12 rounded-xl object-cover border border-slate-200 shadow-sm"
-                  />
-                  <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+                <div className="relative w-12 h-12 rounded-xl bg-gradient-to-tr from-slate-900 via-blue-950 to-slate-800 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-sm shrink-0">
+                  <Truck className="w-6 h-6 text-cyan-400" />
+                  <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full animate-pulse"></span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">

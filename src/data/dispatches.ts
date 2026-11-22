@@ -33,7 +33,7 @@ export const INITIAL_DISPATCH: Dispatch = {
     phone: '+58 412-5558912',
     rating: 5.0,
     completedTrips: 142,
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    avatarUrl: '',
     fourLocks: {
       rifAndLicenseGrade5: true,
       facialBiometricsMatch: 99.8,
