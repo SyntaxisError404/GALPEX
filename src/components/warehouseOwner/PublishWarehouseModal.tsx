@@ -66,6 +66,18 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
   const [hasPowerBackup, setHasPowerBackup] = useState<boolean>(false);
   const [hasFireSystem, setHasFireSystem] = useState<boolean>(true);
 
+  // PUNTO 3: Registro Legal como Depositario Mercantil (Código de Comercio)
+  const [companyRif, setCompanyRif] = useState<string>('J-31098234-9');
+  const [legalRepName, setLegalRepName] = useState<string>('Manuel Mendoza');
+  const [legalRepCi, setLegalRepCi] = useState<string>('V-14.829.102');
+  const [acceptMercantileLaw, setAcceptMercantileLaw] = useState<boolean>(false);
+
+  // PUNTO 4: Política de Pago en Custodia y Retención por Incidencias
+  const [acceptEscrowRetention, setAcceptEscrowRetention] = useState<boolean>(false);
+
+  // Modal de contrato mercantil formal
+  const [showContractModal, setShowContractModal] = useState<boolean>(false);
+
   // Asegurar el estado del galpón (condiciones físicas verificadas)
   const [hasLeakProofRoof, setHasLeakProofRoof] = useState<boolean>(true);
   const [hasLevelFloor, setHasLevelFloor] = useState<boolean>(true);
@@ -129,13 +141,28 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
       return;
     }
 
+    // PUNTO 3: Validación obligatoria de Depositario Mercantil
+    if (!acceptMercantileLaw) {
+      setValidationError('Debes aceptar la declaración jurada y responsabilidad legal como Depositario Mercantil (Art. 535 Código de Comercio).');
+      return;
+    }
+
+    // PUNTO 4: Validación obligatoria de Retención Preventiva de Fondos
+    if (!acceptEscrowRetention) {
+      setValidationError('Debes aceptar las condiciones de cobro en custodia y retención de fondos ante siniestros o goteras.');
+      return;
+    }
+
     const featuresList: string[] = ['CCTV HD 24/7'];
     if (hasArmedGuard) featuresList.push('Vigilancia en garita');
     if (hasPowerBackup) featuresList.push('Planta eléctrica de respaldo');
     if (hasLevelFloor) featuresList.push('Piso para montacargas');
     if (hasHeavyGate) featuresList.push('Andén para gandolas');
 
-    const badgesList: string[] = ['Cámaras 24/7 Verificadas'];
+    const badgesList: string[] = [
+      'Cámaras 24/7 Verificadas',
+      'Depositario Mercantil Certificado (Art. 535)'
+    ];
     if (hasLeakProofRoof) badgesList.push('Techo Hermético Sin Goteras');
     if (hasPestControl) badgesList.push('Control de Plagas al Día');
 
@@ -159,9 +186,9 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
       hasCctvCameraSecurity: true,
       verifiedOwner: {
         id: 'usr-owner-active',
-        name: 'Manuel Mendoza',
+        name: legalRepName.trim() || 'Manuel Mendoza',
         company: name.trim() || 'Almacenadora Castillito C.A.',
-        rif: 'J-31098234-9',
+        rif: companyRif.trim() || 'J-31098234-9',
         phone: '+58 414-4328901',
         rating: 5.0
       }
@@ -753,6 +780,120 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
             </div>
           </div>
 
+          {/* 6. SECCIÓN: RESPONSABILIDAD LEGAL (DEPOSITARIO MERCANTIL) Y COBRO EN CUSTODIA */}
+          <div className="space-y-4 pt-2">
+            <div className="flex items-center gap-2 pb-1 border-b border-slate-100">
+              <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-[10px]">
+                6
+              </span>
+              <h4 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">
+                Compromiso Legal (Depositario Mercantil) y Cobro Seguro
+              </h4>
+            </div>
+
+            {/* Datos fiscales obligatorios */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">
+                  RIF de la Empresa <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={companyRif}
+                  onChange={(e) => setCompanyRif(e.target.value)}
+                  placeholder="ej. J-31098234-9"
+                  className="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-mono font-bold text-slate-900"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">
+                  Representante Legal <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={legalRepName}
+                  onChange={(e) => setLegalRepName(e.target.value)}
+                  placeholder="ej. Manuel Mendoza"
+                  className="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-semibold text-slate-900"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">
+                  Cédula de Identidad <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={legalRepCi}
+                  onChange={(e) => setLegalRepCi(e.target.value)}
+                  placeholder="ej. V-14.829.102"
+                  className="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-mono font-bold text-slate-900"
+                />
+              </div>
+            </div>
+
+            {/* PUNTO 3: Bloque de Responsabilidad como Depositario Mercantil */}
+            <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-black text-xs text-blue-950 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-blue-700" />
+                  Punto 3: Responsabilidad Legal como Depositario Mercantil
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowContractModal(true)}
+                  className="text-[11px] font-bold text-blue-700 hover:text-blue-900 underline flex items-center gap-1"
+                >
+                  📄 Leer Contrato Mercantil Completo
+                </button>
+              </div>
+
+              <p className="text-[11px] text-blue-900/90 leading-relaxed">
+                Bajo los <strong>Artículos 535 al 543 del Código de Comercio de Venezuela</strong>, el galpón asume la figura jurídica de <strong>Depositario Mercantil</strong>. Esto significa que respondes legal y patrimonialmente por la integridad de la carga y por la veracidad de las condiciones declaradas (techo sin goteras y cámaras activas).
+              </p>
+
+              <label className="flex items-start gap-2.5 pt-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={acceptMercantileLaw}
+                  onChange={(e) => setAcceptMercantileLaw(e.target.checked)}
+                  className="w-4 h-4 rounded mt-0.5 accent-blue-600 cursor-pointer"
+                />
+                <span className="text-xs font-extrabold text-blue-950">
+                  Declaro bajo fe de juramento la veracidad del estado del galpón y acepto mi responsabilidad como Depositario Mercantil según el Código de Comercio venezolano.
+                </span>
+              </label>
+            </div>
+
+            {/* PUNTO 4: Bloque de Cobro Seguro en Custodia y Retención por Incidencias */}
+            <div className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200 space-y-2">
+              <span className="font-black text-xs text-amber-950 flex items-center gap-1.5">
+                <DollarSign className="w-4 h-4 text-amber-700" />
+                Punto 4: Cobro Seguro en Custodia & Retención por Falsedad o Daños
+              </span>
+
+              <p className="text-[11px] text-amber-900/90 leading-relaxed">
+                El dinero del alquiler <strong>no se cobra por adelantado en mano</strong>. Queda protegido en la <strong>cuenta de custodia KARGON</strong> y se te transfiere a medida que la estancia transcurre sin problemas. Si se comprueba falsedad en tus declaraciones (ej. goteras ocultas que dañen la carga o falta de cámaras prometidas), <strong>tus fondos acumulados serán retenidos automáticamente para indemnizar al cliente</strong>.
+              </p>
+
+              <label className="flex items-start gap-2.5 pt-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={acceptEscrowRetention}
+                  onChange={(e) => setAcceptEscrowRetention(e.target.checked)}
+                  className="w-4 h-4 rounded mt-0.5 accent-amber-600 cursor-pointer"
+                />
+                <span className="text-xs font-extrabold text-amber-950">
+                  Acepto la política de cobro en custodia y autorizo la retención preventiva de mis fondos en caso de siniestro por goteras o falsedad en las condiciones declaradas.
+                </span>
+              </label>
+            </div>
+          </div>
+
           {/* Botones de acción */}
           <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
             <div className="text-[11px] text-slate-500 flex items-center gap-1.5">
@@ -783,6 +924,97 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
           </div>
         </form>
       </div>
+
+      {/* Modal del Contrato Marco de Depósito Mercantil (Punto 3 y 4) */}
+      {showContractModal && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 space-y-4 my-auto max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-blue-600" />
+                <div>
+                  <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight">
+                    Contrato Marco de Depósito Mercantil
+                  </h3>
+                  <div className="text-[10px] text-slate-500 font-mono">
+                    Código de Comercio de la República Bolivariana de Venezuela (Art. 535 - 543)
+                  </div>
+                </div>
+              </div>
+              <button 
+                type="button"
+                onClick={() => setShowContractModal(false)}
+                className="text-slate-400 hover:text-slate-700 p-1 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-3.5 text-xs text-slate-700 overflow-y-auto flex-1 pr-1 font-sans leading-relaxed">
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-[11px] space-y-1">
+                <div><strong>Depositario Mercantil Afiliado:</strong> {name || 'Tu Galpón'} (RIF: {companyRif})</div>
+                <div><strong>Representante Legal:</strong> {legalRepName} (C.I. {legalRepCi})</div>
+                <div><strong>Ubicación Registrada:</strong> {city}, {industrialZone}</div>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs">
+                  Cláusula Primera — Naturaleza Jurídica y Responsabilidad (Art. 535 C.Com):
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  El Afiliado asume formalmente la condición legal de <strong>Depositario Mercantil</strong>. Conforme al Art. 535 del Código de Comercio de Venezuela, el depositario responde de la conservación, resguardo y guarda de la cosa depositada, así como de los daños y perjuicios que por su culpa, negligencia o falta de condiciones físicas sobrevengan a las mercancías.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs">
+                  Cláusula Segunda — Obligación Innegociable de Cámaras (CCTV 24/7):
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  El Depositario declara que el recinto cuenta con sistema de videovigilancia ininterrumpido (CCTV 24 horas). En caso de extravío o hurto atribuible a fallas no justificadas del sistema de cámaras o ausencia de grabaciones solicitadas en un peritaje, el Depositario responderá de forma solidaria con su patrimonio.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs">
+                  Cláusula Tercera — Régimen de Cuenta Custodia y Retención Preventiva (Punto 4):
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  Los fondos pagados por los clientes no constituyen pago anticipado irrevocable. Quedan retenidos en la Bóveda de Custodia KARGON y se transfieren al Depositario según transcurra el resguardo. Si se constata falsedad en la declaración de estado físico (ej. filtraciones de lluvia activas) o se reportan daños a las paletas, <strong>KARGON queda irrevocablemente autorizada para retener y congelar los saldos del Depositario</strong> a fin de indemnizar inmediatamente al propietario de la carga.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs">
+                  Cláusula Cuarta — Jurisdicción Aplicable:
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  Para todos los efectos legales y controversias derivadas del presente depósito, las partes se someten a la jurisdicción de los Tribunales Mercantiles de la República Bolivariana de Venezuela.
+                </p>
+              </div>
+
+              <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-[10px] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Documento vinculante con validez jurídica mercantil digital.</span>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-slate-200 flex justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  setAcceptMercantileLaw(true);
+                  setAcceptEscrowRetention(true);
+                  setShowContractModal(false);
+                }}
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow-md transition"
+              >
+                Entendido, Aceptar y Firmar Cláusulas
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

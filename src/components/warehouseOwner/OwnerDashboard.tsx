@@ -14,7 +14,8 @@ import {
   Scale,
   Truck,
   CheckCircle2,
-  Download
+  Download,
+  X
 } from 'lucide-react';
 import { PublishWarehouseModal } from './PublishWarehouseModal';
 
@@ -31,6 +32,7 @@ export const OwnerDashboard: React.FC = () => {
   const [showPublishModal, setShowPublishModal] = useState(false);
   const [showPayoutModal, setShowPayoutModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showLegalContract, setShowLegalContract] = useState(false);
 
   // Search filter
   const filteredInventory = inventory.filter(item => 
@@ -72,6 +74,14 @@ export const OwnerDashboard: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
+            onClick={() => setShowLegalContract(true)}
+            className="px-3.5 py-2 rounded-xl border border-blue-200 bg-blue-50/80 hover:bg-blue-100 text-blue-900 font-bold text-xs flex items-center gap-1.5 shadow-sm transition"
+          >
+            <Scale className="w-3.5 h-3.5 text-blue-700" />
+            <span>Contrato Mercantil (Art. 535)</span>
+          </button>
+
+          <button
             onClick={() => setShowReportModal(true)}
             className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center gap-1.5 shadow-sm transition"
           >
@@ -93,6 +103,36 @@ export const OwnerDashboard: React.FC = () => {
           >
             <Plus className="w-3.5 h-3.5" />
             <span>+ Publicar Espacio Disponible</span>
+          </button>
+        </div>
+      </div>
+
+      {/* BANNER INSTITUCIONAL: PUNTO 3 (DEPOSITARIO MERCANTIL) Y PUNTO 4 (COBRO EN CUSTODIA) */}
+      <div className="p-4.5 rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-blue-900/40">
+        <div className="flex items-start md:items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center shrink-0">
+            <Scale className="w-6 h-6 text-cyan-300" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-black text-white">
+                Galpón Afiliado como Depositario Mercantil (Código de Comercio)
+              </span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
+                RIF: J-31098234-9 Auditado
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-300 mt-1 leading-relaxed max-w-3xl">
+              <strong>Garantía de Confianza:</strong> Bajo el <strong>Art. 535 del Código de Comercio</strong>, este galpón asume responsabilidad legal por la custodia de la mercancía. Los clientes pagan a la cuenta de custodia KARGON y los fondos se liberan al completarse el resguardo. Si se detectara una gotera o daño imputable al galpón, <strong>los fondos se retienen de forma preventiva para indemnizar al cliente</strong>.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setShowLegalContract(true)}
+            className="text-xs font-black text-cyan-300 hover:text-white px-3.5 py-2 rounded-xl bg-blue-900/60 hover:bg-blue-800/80 border border-blue-700/50 transition whitespace-nowrap shadow-sm"
+          >
+            Ver Marco Legal & Retenciones
           </button>
         </div>
       </div>
@@ -475,6 +515,80 @@ export const OwnerDashboard: React.FC = () => {
             >
               Descargar Resumen en PDF
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Contrato Mercantil & Protocolo de Retención (Puntos 3 y 4) */}
+      {showLegalContract && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 shrink-0">
+              <div className="flex items-center gap-2">
+                <Scale className="w-5 h-5 text-blue-700" />
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 uppercase">
+                    Régimen de Depositario Mercantil & Bóveda Escrow
+                  </h3>
+                  <div className="text-[10px] text-slate-500 font-mono">
+                    Artículos 535 al 543 del Código de Comercio de Venezuela
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowLegalContract(false)} 
+                className="text-slate-400 hover:text-slate-700 font-bold p-1 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-3.5 text-xs text-slate-700 overflow-y-auto flex-1 pr-1 leading-relaxed">
+              <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-[11px] space-y-1">
+                <div><strong>Galpón Auditado:</strong> Centro Logístico San Diego - Nave B</div>
+                <div><strong>Razón Social:</strong> Inversiones Big Low Logistic C.A. (RIF: J-40192839-2)</div>
+                <div><strong>Estatus Operativo:</strong> Depositario Mercantil Certificado Activo</div>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  Punto 3: ¿Por qué el dueño del galpón responde legalmente? (Art. 535 C.Com)
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  En la legislación mercantil venezolana, el depósito no es un simple alquiler pasivo. Quien recibe mercancía ajena como negocio asume la figura de <strong>Depositario Mercantil</strong>. El Art. 535 del Código de Comercio estipula que el depositario responde civil y penalmente por cualquier daño, deterioro o pérdida si mintió sobre sus instalaciones o si incurrió en negligencia.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h5 className="font-extrabold text-slate-900 text-xs flex items-center gap-1.5">
+                  <DollarSign className="w-4 h-4 text-amber-600" />
+                  Punto 4: ¿Cómo protege KARGON el dinero si el galpón mintió? (Retención de Fondos)
+                </h5>
+                <p className="text-[11px] text-slate-600">
+                  El cliente <strong>no paga dinero por adelantado en mano al dueño</strong>. Los fondos están en la <strong>cuenta de custodia KARGON</strong>:
+                </p>
+                <ul className="list-disc pl-5 text-[11px] text-slate-600 space-y-1">
+                  <li><strong>Liberación escalonada:</strong> El dueño cobra conforme pasan los días y se confirma que no hay incidencias.</li>
+                  <li><strong>Protocolo de Congelamiento Inmediato:</strong> Si un cliente o chofer reporta que una gotera mojó su mercancía o que el galpón no tiene las cámaras prometidas, el sistema <strong>retiene de inmediato los fondos acumulados del galpón</strong> hasta que se indemnice al cliente.</li>
+                  <li><strong>Cobertura de Pérdidas:</strong> Los saldos retenidos del galpón se aplican directamente para resarcir la pérdida sin que el cliente tenga que demandar por su cuenta.</li>
+                </ul>
+              </div>
+
+              <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Mecanismo contractual activo en cada orden de custodia generada en KARGON.</span>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-slate-200 flex justify-end">
+              <button
+                onClick={() => setShowLegalContract(false)}
+                className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs transition"
+              >
+                Cerrar Ventana Informativa
+              </button>
+            </div>
           </div>
         </div>
       )}
