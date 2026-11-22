@@ -40,7 +40,7 @@ export const OwnerDashboard: React.FC = () => {
   );
 
   const handleReturnAction = (lotId: string) => {
-    if (confirm('¿Ejecutar Cláusula 5 de Retorno Automático? El depósito de garantía de $30.00 USD cubrirá el flete de despacho de vuelta al origen, liberando el espacio sin costo para el galpón.')) {
+    if (confirm('¿Ejecutar devolución de mercancía por tiempo vencido? El depósito de garantía de $25.00 USD ya cubrió el flete de regreso al cliente, por lo que tu espacio quedará libre de inmediato y sin costo para ti.')) {
       executeAutomaticReturn(lotId);
     }
   };
@@ -59,13 +59,13 @@ export const OwnerDashboard: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-            CONSOLA OPERATIVA / GALPÓN SAN DIEGO - NAVE B
+            PANEL DE CONTROL DE TU GALPÓN / SAN DIEGO - NAVE B
           </div>
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Monetización & Ocupación
+            Control de Alquiler y Espacio Ocupado
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Control de custodias y rendimiento de tu galpón.
+            Supervisa los clientes que guardan mercancía en tu galpón y el dinero que vas ganando.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export const OwnerDashboard: React.FC = () => {
             className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center gap-1.5 shadow-sm transition"
           >
             <Download className="w-3.5 h-3.5 text-slate-500" />
-            <span>Reporte Fiscal</span>
+            <span>Descargar Resumen</span>
           </button>
 
           <button
@@ -84,26 +84,26 @@ export const OwnerDashboard: React.FC = () => {
             className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs flex items-center gap-2 shadow-md transition"
           >
             <DollarSign className="w-4 h-4 text-emerald-400" />
-            <span>Retirar Escrow ($960.00)</span>
+            <span>Cobrar Dinero Acumulado ($960.00)</span>
           </button>
 
           <button
             onClick={() => setShowPublishModal(true)}
-            className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-blue-600/20 transition"
+            className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>+ Publicar Espacio</span>
+            <span>+ Publicar Espacio Disponible</span>
           </button>
         </div>
       </div>
 
-      {/* 4 KPI Cards (Matches Screenshot 3) */}
+      {/* 4 KPI Cards en lenguaje sencillo */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* KPI 1: Espacio Monetizado */}
+        {/* KPI 1: Espacio Alquilado */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider">
-              ESPACIO MONETIZADO
+              ESPACIO ALQUILADO
             </span>
             <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
@@ -111,92 +111,92 @@ export const OwnerDashboard: React.FC = () => {
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono flex items-baseline gap-1.5">
             <span>68%</span>
-            <span className="text-xs font-semibold text-slate-400">(540 m²)</span>
+            <span className="text-xs font-semibold text-slate-400">(540 m² de 800 m²)</span>
           </div>
           <div className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1 mt-1 mb-2">
             <TrendingUp className="w-3.5 h-3.5" />
-            <span>+14% vs mes anterior</span>
+            <span>+14% de ocupación este mes</span>
           </div>
           <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
             <div className="bg-emerald-500 h-full rounded-full" style={{ width: '68%' }}></div>
           </div>
         </div>
 
-        {/* KPI 2: Ingresos del Mes */}
+        {/* KPI 2: Dinero Ganado */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider">
-              INGRESOS DEL MES
+              DINERO GANADO ESTE MES
             </span>
             <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <DollarSign className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono">
-            $960.00
+            $960.00 USD
           </div>
           <div className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1 mt-1">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Escrow Liquidable Inmediato</span>
+            <span>Listo para transferir a tu cuenta</span>
           </div>
           <div className="text-[10px] text-slate-400 mt-1 font-mono">
-            Tasa fijada: Bs. {bcvRate.toFixed(2)} / USD
+            Tasa oficial BCV: Bs. {bcvRate.toFixed(2)} / USD
           </div>
         </div>
 
-        {/* KPI 3: Lotes Activos */}
+        {/* KPI 3: Clientes y Cargas */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider">
-              LOTES ACTIVOS
+              CLIENTES GUARDANDO CARGA
             </span>
             <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
               <Layers className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono">
-            12 Proveedores
+            12 Clientes
           </div>
           <div className="text-[11px] text-slate-500 truncate mt-1">
             TecnoParts, Polar, FerreQuim...
           </div>
           <div className="text-[10px] text-blue-600 font-semibold mt-1">
-            • 92 paletas en custodia física
+            • 92 paletas guardadas en tu galpón
           </div>
         </div>
 
-        {/* KPI 4: Garantías Anti-Abandono */}
+        {/* KPI 4: Garantía de Salida */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider">
-              GARANTÍAS ANTI-ABANDONO
+              GARANTÍAS DE DESOCUPACIÓN
             </span>
             <div className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
               <ShieldCheck className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-black text-slate-900 font-mono">
-            $300.00
+            $300.00 USD
           </div>
           <div className="text-[11px] text-slate-600 mt-1">
-            12 depósitos de $25 en custodia
+            12 depósitos de $25 (flete cubierto)
           </div>
           <div className="text-[10px] text-emerald-600 font-bold mt-1">
-            Riesgo calculado: 0% Mora Histórica
+            Garantizado: Si no retiran, el camión ya está pago
           </div>
         </div>
       </div>
 
-      {/* Main Table: Control de Galpón (Matches Screenshot 3) */}
+      {/* Main Table: Control de Galpón */}
       <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
         {/* Table Header Filter bar */}
         <div className="p-4.5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h2 className="text-sm font-extrabold text-slate-900">
-              Mi Inventario & Control de Galpón
+              Mercancía Almacenada en tu Galpón
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Estancias, depósitos y vencimientos en tiempo real.
+              Revisa los días que le quedan a cada cliente y el estado de sus pagos.
             </p>
           </div>
 
@@ -205,7 +205,7 @@ export const OwnerDashboard: React.FC = () => {
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Buscar SKU, proveedor..."
+                placeholder="Buscar cliente, producto, código..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 w-48 sm:w-64"
@@ -213,7 +213,7 @@ export const OwnerDashboard: React.FC = () => {
             </div>
             <button className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg flex items-center gap-1 transition">
               <Filter className="w-3.5 h-3.5 text-slate-500" />
-              <span>Filtros</span>
+              <span>Filtrar</span>
             </button>
           </div>
         </div>
@@ -223,13 +223,13 @@ export const OwnerDashboard: React.FC = () => {
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-slate-50/80 text-[10px] uppercase font-bold text-slate-400 tracking-wider border-b border-slate-200/80">
-                <th className="py-3 px-4">SKU / LOTE</th>
-                <th className="py-3 px-4">NOMBRE DEL PROVEEDOR</th>
+                <th className="py-3 px-4">CÓDIGO / LOTE</th>
+                <th className="py-3 px-4">CLIENTE / EMPRESA</th>
                 <th className="py-3 px-4">PALETAS</th>
-                <th className="py-3 px-4">DÍAS RESTANTES</th>
-                <th className="py-3 px-4">GARANTÍA ESCROW</th>
-                <th className="py-3 px-4">ESTADO OPERATIVO</th>
-                <th className="py-3 px-4 text-right">ACCIÓN</th>
+                <th className="py-3 px-4">TIEMPO RESTANTE</th>
+                <th className="py-3 px-4">DEPÓSITO EN GARANTÍA</th>
+                <th className="py-3 px-4">ESTADO ACTUAL</th>
+                <th className="py-3 px-4 text-right">OPCIONES</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
@@ -246,7 +246,7 @@ export const OwnerDashboard: React.FC = () => {
                         <span>{item.sku}</span>
                       </div>
                       <div className="text-[10px] text-slate-400 font-sans">
-                        {item.lotCode}
+                        Lote: {item.lotCode}
                       </div>
                     </td>
 
@@ -258,46 +258,46 @@ export const OwnerDashboard: React.FC = () => {
 
                     {/* Pallets */}
                     <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
-                      {item.palletsCount}
+                      {item.palletsCount} paletas
                     </td>
 
                     {/* Remaining Days */}
                     <td className="py-3.5 px-4 font-mono">
                       {isAutoReturned ? (
-                        <span className="text-red-600 font-bold">Mora Saldada</span>
+                        <span className="text-slate-500 font-bold">Tiempo completado</span>
                       ) : isUrgent ? (
                         <span className="inline-flex items-center gap-1 font-bold text-amber-600">
                           <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
-                          • {item.remainingDays} días
+                          • Quedan {item.remainingDays} días
                         </span>
                       ) : (
-                        <span className="text-slate-600">{item.remainingDays} días</span>
+                        <span className="text-slate-600">{item.remainingDays} días pagados</span>
                       )}
                     </td>
 
                     {/* Escrow Guarantee */}
                     <td className="py-3.5 px-4">
                       <div className="font-extrabold text-emerald-700 font-mono">
-                        ${item.antiAbandonmentDeposit.toFixed(2)}
+                        ${item.antiAbandonmentDeposit.toFixed(2)} USD
                       </div>
-                      <div className="text-[10px] text-slate-400">Protegido</div>
+                      <div className="text-[10px] text-slate-400">Flete garantizado</div>
                     </td>
 
                     {/* Operating Status */}
                     <td className="py-3.5 px-4">
                       {isAutoReturned ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-red-50 text-red-700 border border-red-200 text-[11px] font-bold">
-                          Retorno Automático Activado
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[11px] font-bold">
+                          Devuelto al cliente (flete cubierto)
                         </span>
                       ) : isUrgent ? (
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-bold">
                           <AlertTriangle className="w-3 h-3 text-amber-600" />
-                          Vence en 2 días - Retorno listo
+                          Vence pronto (quedan 2 días)
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold">
                           <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                          Almacenamiento Normal
+                          Almacenado al día
                         </span>
                       )}
                     </td>
@@ -306,7 +306,7 @@ export const OwnerDashboard: React.FC = () => {
                     <td className="py-3.5 px-4 text-right">
                       {isAutoReturned ? (
                         <span className="text-[11px] text-slate-400 font-medium">
-                          En tránsito de regreso
+                          Espacio desocupado
                         </span>
                       ) : isUrgent ? (
                         <div className="flex items-center justify-end gap-1.5">
@@ -314,14 +314,14 @@ export const OwnerDashboard: React.FC = () => {
                             onClick={() => handleDispatchAction(item.id)}
                             className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] transition"
                           >
-                            Generar Acta / Despachar
+                            Dar Salida
                           </button>
                           <button
                             onClick={() => handleReturnAction(item.id)}
-                            title="Ejecutar Retorno Automático con Depósito de Garantía (Cláusula 5)"
+                            title="Regresar la carga usando el depósito de garantía que dejó el cliente"
                             className="px-2.5 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[11px] border border-amber-300 transition"
                           >
-                            Retorno Auto
+                            Devolver Carga
                           </button>
                         </div>
                       ) : (
@@ -329,7 +329,7 @@ export const OwnerDashboard: React.FC = () => {
                           onClick={() => setActiveReceptionReceipt(item)}
                           className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold text-[11px] transition"
                         >
-                          Ver Detalles
+                          Ver Comprobante con Foto
                         </button>
                       )}
                     </td>
@@ -342,12 +342,12 @@ export const OwnerDashboard: React.FC = () => {
 
         {/* Table footer info */}
         <div className="p-3 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Mostrando {filteredInventory.length} de 12 lotes almacenados</span>
-          <span className="text-slate-500">Actualizado vía SADA / SICA en tiempo real</span>
+          <span>Mostrando {filteredInventory.length} de 12 clientes almacenando mercancía</span>
+          <span className="text-slate-500">Registro seguro con fotos y firmas digitales</span>
         </div>
       </div>
 
-      {/* Bottom Information Cards (Matches Screenshot 3) */}
+      {/* Bottom Information Cards en lenguaje sencillo */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4.5 shadow-sm flex items-start gap-3.5">
           <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0 border border-blue-100">
@@ -355,10 +355,10 @@ export const OwnerDashboard: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xs font-bold text-slate-900">
-              Blindaje Legal Automatizado
+              Comprobante Digital con Foto al Recibir
             </h3>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-              Actas de recepción con firma criptográfica y foto que eliminan disputas de conteo o mermas.
+              Cada vez que entra un camión se toma foto de las paletas y se firma digitalmente. Así nadie puede reclamar que faltó mercancía o que venía rota.
             </p>
           </div>
         </div>
@@ -369,10 +369,10 @@ export const OwnerDashboard: React.FC = () => {
           </div>
           <div>
             <h3 className="text-xs font-bold text-slate-900">
-              Flete de Respaldo (Anti-Abandono)
+              Garantía de Desocupación de Espacio
             </h3>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-              Al vencer el plazo, la carga regresa usando el depósito de $30, liberando tu espacio sin pérdidas.
+              Cada cliente deja un depósito de garantía de $25. Si vence su tiempo y no retira su mercancía, el sistema paga el camión de regreso a su origen para que tu espacio quede libre sin pérdidas.
             </p>
           </div>
         </div>
@@ -383,7 +383,7 @@ export const OwnerDashboard: React.FC = () => {
         <PublishWarehouseModal onClose={() => setShowPublishModal(false)} />
       )}
 
-      {/* Payout Modal */}
+      {/* Payout Modal en lenguaje sencillo */}
       {showPayoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
@@ -391,45 +391,49 @@ export const OwnerDashboard: React.FC = () => {
               <div className="flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-emerald-600" />
                 <h3 className="text-base font-extrabold text-slate-900">
-                  Retiro de Fondos Escrow Acumulados
+                  Transferir tu Dinero a tu Banco
                 </h3>
               </div>
-              <button onClick={() => setShowPayoutModal(false)} className="text-slate-400 hover:text-slate-600 font-bold">
+              <button onClick={() => setShowPayoutModal(false)} className="text-slate-400 hover:text-slate-600 font-bold p-1">
                 ✕
               </button>
             </div>
 
             <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-              <div className="text-xs text-emerald-800 font-semibold">Saldo Liquidable Inmediato</div>
+              <div className="text-xs text-emerald-800 font-semibold">Dinero Total Acumulado para Cobrar</div>
               <div className="text-3xl font-black text-emerald-950 font-mono mt-1">$960.00 USD</div>
               <div className="text-xs text-emerald-700 mt-1 font-mono">
-                ≈ {(960.00 * bcvRate).toLocaleString('es-VE', { maximumFractionDigits: 2 })} VES (Tasa BCV {bcvRate.toFixed(2)})
+                Equivalente oficial: {(960.00 * bcvRate).toLocaleString('es-VE', { maximumFractionDigits: 2 })} Bolívares (Tasa BCV {bcvRate.toFixed(2)})
               </div>
             </div>
 
             <div className="space-y-2 text-xs">
-              <label className="font-bold text-slate-700 block">Destino de Transferencia</label>
-              <div className="p-3 rounded-lg border border-slate-300 bg-slate-50 space-y-1">
+              <label className="font-bold text-slate-700 block">Tu Cuenta Bancaria Registrada:</label>
+              <div className="p-3 rounded-xl border border-slate-300 bg-slate-50 space-y-1">
                 <div className="font-bold text-slate-900">Banesco Banco Universal (Cuenta Corriente)</div>
                 <div className="text-slate-500 font-mono text-[11px]">0134-0239-12-0001928391 • RIF: J-31098234-9</div>
-                <div className="text-slate-500 text-[11px]">Logística Castillito C.A.</div>
+                <div className="text-slate-600 text-[11px] font-semibold">Logística Castillito C.A.</div>
               </div>
             </div>
 
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              La transferencia se envía de inmediato a tu cuenta registrada mediante liquidación bancaria nacional o transferencia en divisas.
+            </p>
+
             <button
               onClick={() => {
-                alert('¡Solicitud de retiro procesada! Los fondos se reflejarán en tu cuenta Banesco en los próximos minutos vía liquidación interbancaria SUDEBAN.');
+                alert('¡Transferencia procesada! Tu dinero de $960.00 USD ha sido enviado a tu cuenta bancaria Banesco.');
                 setShowPayoutModal(false);
               }}
-              className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition"
+              className="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-md transition"
             >
-              Confirmar Retiro Inmediato
+              Confirmar Transferencia a mi Cuenta Bancaria
             </button>
           </div>
         </div>
       )}
 
-      {/* Fiscal Report Modal */}
+      {/* Fiscal Report Modal en lenguaje claro */}
       {showReportModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
@@ -437,39 +441,39 @@ export const OwnerDashboard: React.FC = () => {
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-blue-600" />
                 <h3 className="text-base font-extrabold text-slate-900">
-                  Reporte Fiscal & Retenciones SENIAT
+                  Resumen de Ingresos y Facturación
                 </h3>
               </div>
-              <button onClick={() => setShowReportModal(false)} className="text-slate-400 hover:text-slate-600 font-bold">
+              <button onClick={() => setShowReportModal(false)} className="text-slate-400 hover:text-slate-600 font-bold p-1">
                 ✕
               </button>
             </div>
 
             <div className="space-y-3 text-xs text-slate-600">
               <p>
-                Resumen tributario conforme a la Providencia Administrativa SENIAT sobre facturación electrónica y retención de IVA e ISLR en depósitos mercantiles:
+                Detalle claro de las operaciones de alquiler de tu galpón durante este período:
               </p>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 font-mono">
-                <div className="flex justify-between"><span>Base Imponible Almacenaje:</span><strong>$1,840.00 USD</strong></div>
-                <div className="flex justify-between text-slate-500"><span>Equivalente BCV:</span><strong>{(1840 * bcvRate).toLocaleString()} Bs.</strong></div>
+                <div className="flex justify-between"><span>Total Facturado por Alquiler:</span><strong>$1,840.00 USD</strong></div>
+                <div className="flex justify-between text-slate-500"><span>Equivalente en Bolívares (BCV):</span><strong>{(1840 * bcvRate).toLocaleString()} Bs.</strong></div>
                 <div className="flex justify-between"><span>Comisión KARGON (10%):</span><strong>$184.00 USD</strong></div>
-                <div className="flex justify-between"><span>Retención ISLR Estimada (2%):</span><strong>$36.80 USD</strong></div>
+                <div className="flex justify-between"><span>Retención de Impuestos (2%):</span><strong>$36.80 USD</strong></div>
               </div>
 
               <div className="p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 text-[11px]">
-                Facturación fiscal automática emitida con número de control y RIF al día.
+                Todas las facturas se emiten automáticamente con RIF y número de control fiscal.
               </div>
             </div>
 
             <button
               onClick={() => {
-                alert('Reporte en formato PDF descargado.');
+                alert('Resumen descargado en PDF.');
                 setShowReportModal(false);
               }}
               className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow transition"
             >
-              Descargar Comprobante Fiscal PDF
+              Descargar Resumen en PDF
             </button>
           </div>
         </div>

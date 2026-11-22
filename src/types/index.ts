@@ -45,6 +45,9 @@ export interface Warehouse {
   features: string[];
   securityBadges: string[];
   imageUrl: string;
+  conditionDescription?: string;
+  hasCctvCameraSecurity?: boolean;
+  galleryImages?: string[];
   verifiedOwner: {
     id: string;
     name: string;
