@@ -16,6 +16,18 @@ export type CargoCategory =
   | 'repuestos_ferreteria' 
   | 'refrigerado';
 
+export interface ProviderCargoProfile {
+  productType: CargoCategory;
+  productName: string;
+  hasSadaOrSica: boolean;
+  requiresSacs: boolean;
+  requiresTemperatureControl: boolean;
+  hasChemicalOrOdors: boolean;
+  estimatedPallets: number;
+  preferredZone: string;
+  completedAt: string;
+}
+
 export interface Warehouse {
   id: string;
   name: string;

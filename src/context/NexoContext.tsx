@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { UserRole, Warehouse, StoredLot, Dispatch, EscrowTransaction, CargoCategory } from '../types';
+import type { UserRole, Warehouse, StoredLot, Dispatch, EscrowTransaction, CargoCategory, ProviderCargoProfile } from '../types';
 
 type TabId = 'explorar' | 'inventario' | 'despachos' | 'escrow';
 
 // Pestañas permitidas y vista principal (home) de cada perfil.
-// Mantiene la navegación coherente: al cambiar de rol se aterriza en su vista central.
 const ROLE_TABS: Record<UserRole, { home: TabId; allowed: TabId[] }> = {
   proveedor: { home: 'explorar', allowed: ['explorar', 'despachos', 'escrow'] },
   dueno_galpon: { home: 'inventario', allowed: ['inventario', 'despachos', 'escrow'] },
@@ -16,6 +15,8 @@ import { INITIAL_DISPATCH } from '../data/dispatches';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import confetti from 'canvas-confetti';
 
+const CARGO_PROFILE_KEY = 'kargon_provider_cargo_profile';
+
 interface NexoContextType {
   role: UserRole;
   setRole: (role: UserRole) => void;
@@ -26,6 +27,10 @@ interface NexoContextType {
   dispatch: Dispatch;
   bcvRate: number;
   setBcvRate: (rate: number) => void;
+  bcvLastUpdated: string;
+  bcvLoading: boolean;
+  bcvSource: string;
+  fetchLiveBcvRate: () => Promise<void>;
   selectedWarehouseForReservation: Warehouse | null;
   setSelectedWarehouseForReservation: (wh: Warehouse | null) => void;
   escrowTransactions: EscrowTransaction[];
@@ -33,6 +38,12 @@ interface NexoContextType {
   setActiveReceptionReceipt: (lot: StoredLot | null) => void;
   isCloudSynced: boolean;
   
+  // Cargo classification profile for provider
+  cargoProfile: ProviderCargoProfile | null;
+  saveCargoProfile: (profile: ProviderCargoProfile) => void;
+  showOnboardingModal: boolean;
+  setShowOnboardingModal: (show: boolean) => void;
+
   // Actions
   reserveWarehouse: (params: {
     warehouse: Warehouse;
@@ -108,16 +119,77 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
   const [role, setRoleState] = useState<UserRole>(initialRole);
   const [activeTab, setActiveTab] = useState<TabId>(ROLE_TABS[initialRole].home);
 
-  // Cambiar de perfil lleva al usuario a la vista principal de ese rol
-  // si la pestaña actual no aplica para el nuevo perfil (navegación intuitiva).
   const setRole = (newRole: UserRole) => {
     setRoleState(newRole);
     setActiveTab(prev => (ROLE_TABS[newRole].allowed.includes(prev) ? prev : ROLE_TABS[newRole].home));
+    // If switching to proveedor and has no profile, trigger onboarding
+    if (newRole === 'proveedor' && !cargoProfile) {
+      setShowOnboardingModal(true);
+    }
   };
+
   const [warehouses, setWarehouses] = useState<Warehouse[]>(INITIAL_WAREHOUSES);
   const [inventory, setInventory] = useState<StoredLot[]>(INITIAL_INVENTORY);
   const [dispatch, setDispatch] = useState<Dispatch>(INITIAL_DISPATCH);
+
+  // DolarApi Live BCV State
   const [bcvRate, setBcvRate] = useState<number>(36.45);
+  const [bcvLastUpdated, setBcvLastUpdated] = useState<string>('');
+  const [bcvLoading, setBcvLoading] = useState<boolean>(false);
+  const [bcvSource, setBcvSource] = useState<string>('DolarApi (BCV Oficial)');
+
+  // Provider Cargo Profile State
+  const [cargoProfile, setCargoProfile] = useState<ProviderCargoProfile | null>(() => {
+    try {
+      const raw = localStorage.getItem(CARGO_PROFILE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch { /* ignore */ }
+    return null;
+  });
+
+  const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(false);
+
+  // Trigger onboarding automatically on start if role is proveedor and no profile exists
+  useEffect(() => {
+    if (role === 'proveedor' && !cargoProfile) {
+      setShowOnboardingModal(true);
+    }
+  }, [role, cargoProfile]);
+
+  const saveCargoProfile = (profile: ProviderCargoProfile) => {
+    setCargoProfile(profile);
+    try {
+      localStorage.setItem(CARGO_PROFILE_KEY, JSON.stringify(profile));
+    } catch { /* ignore */ }
+    setShowOnboardingModal(false);
+  };
+
+  // Live Fetch from DolarApi Venezuela
+  const fetchLiveBcvRate = async () => {
+    setBcvLoading(true);
+    try {
+      const response = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
+      if (response.ok) {
+        const data = await response.json();
+        const rate = Number(data.promedio || data.venta || data.compra);
+        if (rate && !isNaN(rate) && rate > 0) {
+          setBcvRate(rate);
+          setBcvLastUpdated(data.fechaActualizacion || new Date().toISOString());
+          setBcvSource(`DolarApi • ${data.nombre || 'Oficial BCV'}`);
+          console.log('✅ Tasa oficial BCV sincronizada en vivo con DolarApi:', rate);
+        }
+      }
+    } catch (err) {
+      console.warn('⚠️ No se pudo consultar DolarApi en vivo, usando tasa local fijada:', err);
+    } finally {
+      setBcvLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLiveBcvRate();
+  }, []);
+
   const [selectedWarehouseForReservation, setSelectedWarehouseForReservation] = useState<Warehouse | null>(INITIAL_WAREHOUSES[0]);
   const [escrowTransactions, setEscrowTransactions] = useState<EscrowTransaction[]>(INITIAL_ESCROW_TXS);
   const [activeReceptionReceipt, setActiveReceptionReceipt] = useState<StoredLot | null>(null);
@@ -443,6 +515,14 @@ export const NexoProvider: React.FC<{ children: React.ReactNode; initialRole?: U
         dispatch,
         bcvRate,
         setBcvRate,
+        bcvLastUpdated,
+        bcvLoading,
+        bcvSource,
+        fetchLiveBcvRate,
+        cargoProfile,
+        saveCargoProfile,
+        showOnboardingModal,
+        setShowOnboardingModal,
         selectedWarehouseForReservation,
         setSelectedWarehouseForReservation,
         escrowTransactions,

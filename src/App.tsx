@@ -14,9 +14,19 @@ import { CarrierDashboard } from './components/carrier/CarrierDashboard';
 import { NexoBot } from './components/chatbot/NexoBot';
 import { BcvRateModal } from './components/modals/BcvRateModal';
 import { ReceptionReceiptModal } from './components/provider/ReceptionReceiptModal';
+import { ProviderOnboardingModal } from './components/provider/ProviderOnboardingModal';
 
 const MainAppContent: React.FC = () => {
-  const { role, activeTab, activeReceptionReceipt, setActiveReceptionReceipt } = useNexo();
+  const { 
+    role, 
+    activeTab, 
+    activeReceptionReceipt, 
+    setActiveReceptionReceipt,
+    showOnboardingModal,
+    setShowOnboardingModal,
+    cargoProfile,
+    saveCargoProfile
+  } = useNexo();
   const [showBcvModal, setShowBcvModal] = useState(false);
 
   const renderCurrentView = () => {
@@ -58,6 +68,14 @@ const MainAppContent: React.FC = () => {
 
       {/* BCV Rate Adjustment Modal */}
       <BcvRateModal isOpen={showBcvModal} onClose={() => setShowBcvModal(false)} />
+
+      {/* Cuestionario Obligatorio de Clasificación de Carga para Proveedores */}
+      <ProviderOnboardingModal
+        isOpen={showOnboardingModal && role === 'proveedor'}
+        initialProfile={cargoProfile}
+        onComplete={(profile) => saveCargoProfile(profile)}
+        onClose={cargoProfile ? () => setShowOnboardingModal(false) : undefined}
+      />
 
       {/* Reception Receipt Modal if active */}
       {activeReceptionReceipt && (

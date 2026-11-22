@@ -23,16 +23,31 @@ export const WarehouseCatalog: React.FC = () => {
     bcvRate, 
     selectedWarehouseForReservation, 
     setSelectedWarehouseForReservation,
-    reserveWarehouse 
+    reserveWarehouse,
+    cargoProfile,
+    setShowOnboardingModal
   } = useNexo();
 
-  const [selectedLocation, setSelectedLocation] = useState<string>('all');
-  const [selectedCategory, setSelectedCategory] = useState<CargoCategory>('repuestos_ferreteria');
-  const [estimatedPallets, setEstimatedPallets] = useState<number>(50);
+  const [selectedLocation, setSelectedLocation] = useState<string>(cargoProfile?.preferredZone || 'all');
+  const [selectedCategory, setSelectedCategory] = useState<CargoCategory>(cargoProfile?.productType || 'repuestos_ferreteria');
+  const [estimatedPallets, setEstimatedPallets] = useState<number>(cargoProfile?.estimatedPallets || 50);
   const [contractDays, setContractDays] = useState<number>(15);
   const [sortBy, setSortBy] = useState<'disponibilidad' | 'precio'>('disponibilidad');
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'pagomovil' | 'transferencia' | 'zelle'>('pagomovil');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Sync state if cargo profile updates
+  React.useEffect(() => {
+    if (cargoProfile) {
+      setSelectedCategory(cargoProfile.productType);
+      if (cargoProfile.preferredZone && cargoProfile.preferredZone !== 'all') {
+        setSelectedLocation(cargoProfile.preferredZone);
+      }
+      if (cargoProfile.estimatedPallets) {
+        setEstimatedPallets(cargoProfile.estimatedPallets);
+      }
+    }
+  }, [cargoProfile]);
 
   // Filter warehouses
   const filteredWarehouses = warehouses.filter(wh => {
@@ -172,6 +187,36 @@ export const WarehouseCatalog: React.FC = () => {
       <div className="flex-1 flex flex-col xl:flex-row gap-6 p-6 min-w-0">
         {/* Left: Warehouse Cards Grid */}
         <div className="flex-1 min-w-0">
+          {/* Active Cargo Profile Banner if provider has answered the questionnaire */}
+          {cargoProfile && (
+            <div className="mb-4 p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border border-blue-900/40">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black text-white">
+                      Perfil Logístico Activo: {cargoProfile.productName || cargoProfile.productType.replace('_', ' ')}
+                    </span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
+                      Auditado
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    Mostrando galpones habilitados para <strong className="text-white capitalize">{cargoProfile.productType.replace('_', ' ')}</strong> con <strong>Cero Contaminación Cruzada</strong>.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowOnboardingModal(true)}
+                className="text-xs font-bold text-blue-300 hover:text-white px-3 py-1.5 rounded-xl bg-blue-900/50 hover:bg-blue-800/60 border border-blue-700/40 transition shrink-0"
+              >
+                Modificar Cuestionario
+              </button>
+            </div>
+          )}
+
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-extrabold text-slate-900 tracking-tight">
