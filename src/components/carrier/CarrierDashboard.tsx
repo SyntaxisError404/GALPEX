@@ -10,16 +10,13 @@ import {
   ArrowRight,
   Award,
   Navigation,
-  Phone,
   MessageSquare,
-  Clock,
   Radio,
   Zap,
   Lock,
   ChevronRight,
   ExternalLink,
-  DollarSign,
-  AlertCircle
+  DollarSign
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 

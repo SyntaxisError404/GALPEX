@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNexo } from '../../context/NexoContext';
+import { QrCodeImage } from '../common/QrCodeImage';
 import {
   ShieldCheck,
   QrCode,
@@ -31,6 +32,10 @@ export const DispatchView: React.FC = () => {
 
   const isStep2Completed = step2.completed;
   const isStep3Completed = step3.completed;
+
+  // Valor REAL codificado en el QR #1 de custodia (verificable al escanear).
+  const qr1Value = `https://syntaxiserror404.github.io/KARGON/?custodia=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&guia=${encodeURIComponent(dispatch.sadaGuide)}&hash=${step2.pickupQrHash}`;
+  const qr1HashShort = `${step2.pickupQrHash.slice(0, 7)}...${step2.pickupQrHash.slice(-4)}`;
 
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-[#f8fafc] p-6">
@@ -405,60 +410,12 @@ export const DispatchView: React.FC = () => {
 
             {/* Interactive QR Display */}
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 inline-block relative group">
-              <div 
+              <div
                 onClick={() => setShowQrExpanded(true)}
-                className="w-48 h-48 bg-white p-2 rounded-xl shadow-inner border border-slate-200 flex items-center justify-center cursor-pointer relative"
+                className="w-48 h-48 bg-white p-2 rounded-xl shadow-inner border border-slate-200 flex items-center justify-center cursor-pointer relative overflow-hidden"
               >
-                {/* SVG QR Code Illustration */}
-                <svg viewBox="0 0 100 100" className="w-full h-full text-slate-900" fill="currentColor">
-                  {/* Position detection patterns */}
-                  <rect x="5" y="5" width="26" height="26" rx="4" />
-                  <rect x="9" y="9" width="18" height="18" fill="white" />
-                  <rect x="13" y="13" width="10" height="10" />
-
-                  <rect x="69" y="5" width="26" height="26" rx="4" />
-                  <rect x="73" y="9" width="18" height="18" fill="white" />
-                  <rect x="77" y="13" width="10" height="10" />
-
-                  <rect x="5" y="69" width="26" height="26" rx="4" />
-                  <rect x="9" y="73" width="18" height="18" fill="white" />
-                  <rect x="13" y="77" width="10" height="10" />
-
-                  {/* QR Data Grid points */}
-                  <rect x="36" y="8" width="5" height="5" />
-                  <rect x="44" y="8" width="5" height="5" />
-                  <rect x="52" y="8" width="8" height="5" />
-                  <rect x="36" y="16" width="10" height="5" />
-                  <rect x="50" y="16" width="6" height="5" />
-                  <rect x="36" y="24" width="6" height="5" />
-                  <rect x="46" y="24" width="12" height="5" />
-
-                  <rect x="8" y="36" width="5" height="12" />
-                  <rect x="16" y="40" width="8" height="6" />
-                  <rect x="26" y="36" width="5" height="10" />
-
-                  <rect x="36" y="36" width="12" height="12" />
-                  <rect x="52" y="36" width="8" height="6" />
-                  <rect x="64" y="36" width="10" height="10" />
-                  <rect x="78" y="36" width="6" height="6" />
-                  <rect x="86" y="40" width="8" height="8" />
-
-                  <rect x="36" y="52" width="6" height="8" />
-                  <rect x="46" y="50" width="10" height="6" />
-                  <rect x="60" y="50" width="8" height="10" />
-                  <rect x="72" y="52" width="14" height="6" />
-
-                  <rect x="36" y="66" width="10" height="6" />
-                  <rect x="50" y="64" width="8" height="10" />
-                  <rect x="62" y="68" width="6" height="6" />
-                  <rect x="72" y="66" width="10" height="10" />
-
-                  <rect x="36" y="78" width="12" height="8" />
-                  <rect x="52" y="80" width="6" height="14" />
-                  <rect x="62" y="78" width="12" height="6" />
-                  <rect x="78" y="80" width="14" height="6" />
-                  <rect x="64" y="88" width="8" height="6" />
-                </svg>
+                {/* Código QR REAL escaneable (codifica la guía SADA y el hash de custodia) */}
+                <QrCodeImage value={qr1Value} size={176} />
 
                 {/* Hover zoom pill */}
                 <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center text-white text-xs font-bold gap-1">
@@ -469,7 +426,7 @@ export const DispatchView: React.FC = () => {
 
               {/* Hash Display */}
               <div className="mt-2.5 text-[10px] font-mono text-slate-500 bg-white py-1 px-2 rounded border border-slate-200 truncate max-w-xs">
-                HASH: <strong>8f4a2c2...d91e</strong> (SHA-256)
+                HASH: <strong>{qr1HashShort}</strong> (SHA-256)
               </div>
             </div>
 
@@ -555,35 +512,8 @@ export const DispatchView: React.FC = () => {
             <h3 className="text-base font-extrabold text-slate-900">
               QR Custodia Legal #1 — Bahía 04
             </h3>
-            <div className="w-64 h-64 bg-slate-50 p-4 rounded-2xl mx-auto border border-slate-200">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-slate-950" fill="currentColor">
-                <rect x="5" y="5" width="26" height="26" rx="4" />
-                <rect x="9" y="9" width="18" height="18" fill="white" />
-                <rect x="13" y="13" width="10" height="10" />
-
-                <rect x="69" y="5" width="26" height="26" rx="4" />
-                <rect x="73" y="9" width="18" height="18" fill="white" />
-                <rect x="77" y="13" width="10" height="10" />
-
-                <rect x="5" y="69" width="26" height="26" rx="4" />
-                <rect x="9" y="73" width="18" height="18" fill="white" />
-                <rect x="13" y="77" width="10" height="10" />
-
-                <rect x="36" y="8" width="5" height="5" />
-                <rect x="44" y="8" width="5" height="5" />
-                <rect x="52" y="8" width="8" height="5" />
-                <rect x="36" y="16" width="10" height="5" />
-                <rect x="50" y="16" width="6" height="5" />
-                <rect x="36" y="24" width="6" height="5" />
-                <rect x="46" y="24" width="12" height="5" />
-                <rect x="36" y="36" width="12" height="12" />
-                <rect x="52" y="36" width="8" height="6" />
-                <rect x="64" y="36" width="10" height="10" />
-                <rect x="36" y="66" width="10" height="6" />
-                <rect x="50" y="64" width="8" height="10" />
-                <rect x="36" y="78" width="12" height="8" />
-                <rect x="52" y="80" width="6" height="14" />
-              </svg>
+            <div className="w-64 h-64 bg-white p-4 rounded-2xl mx-auto border border-slate-200 flex items-center justify-center">
+              <QrCodeImage value={qr1Value} size={224} />
             </div>
             <div className="text-xs text-slate-500 font-mono break-all p-2 bg-slate-50 rounded-lg">
               {dispatch.step2CarrierPickup.pickupQrHash}

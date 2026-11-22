@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNexo } from '../../context/NexoContext';
 import { OpenStreetMapTracking } from '../map/OpenStreetMapTracking';
+import { QrCodeImage } from '../common/QrCodeImage';
 import {
   MapPin,
   Phone,
@@ -26,6 +27,9 @@ export const ClientTrackingView: React.FC = () => {
     completePallets: true,
     noDamage: true
   });
+
+  // Valor REAL del QR #2 de recepción que el receptor muestra al chofer para liberar el Escrow.
+  const qr2Value = `https://syntaxiserror404.github.io/KARGON/?recepcion=1&despacho=${encodeURIComponent(dispatch.dispatchNumber)}&hash=${dispatch.step3ClientDelivery.deliveryQrHash}`;
 
   // Datos del chofer asignado (demo conectado al transportista de KARGON)
   const driver = {
@@ -363,13 +367,10 @@ export const ClientTrackingView: React.FC = () => {
                   Muestra este QR al chofer {driver.name}
                 </div>
                 <div className="w-36 h-36 mx-auto bg-white p-2 rounded-xl border-2 border-dashed border-purple-400 flex items-center justify-center shadow-inner">
-                  <div className="text-center font-mono text-[10px] text-slate-700">
-                    <QrCode className="w-24 h-24 mx-auto text-slate-900" />
-                    <span>REC-2026-9941</span>
-                  </div>
+                  <QrCodeImage value={qr2Value} size={128} dark="#581c87" />
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  Hash Criptográfico de Custodia: <span className="font-mono text-purple-600 font-bold">0x8a92f...c31b</span>
+                  Hash Criptográfico de Custodia: <span className="font-mono text-purple-600 font-bold">{dispatch.step3ClientDelivery.deliveryQrHash.slice(0, 7)}...{dispatch.step3ClientDelivery.deliveryQrHash.slice(-4)}</span>
                 </div>
               </div>
 
