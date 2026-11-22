@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { useNexo } from '../../context/NexoContext';
 import type { UserRole } from '../../types';
-import { 
-  RotateCcw, 
-  Bell, 
-  HelpCircle, 
-  TrendingUp, 
-  ShieldCheck, 
-  Award,
+import {
+  RotateCcw,
+  Bell,
+  TrendingUp,
+  ShieldCheck,
   ChevronDown,
   Database
 } from 'lucide-react';
 
 export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModal }) => {
-  const { role, setRole, bcvRate, resetDemoData, setShowPitchModal, isCloudSynced } = useNexo();
+  const { role, setRole, bcvRate, resetDemoData, isCloudSynced } = useNexo();
   const [showRoleMenu, setShowRoleMenu] = useState(false);
 
   const roleProfiles: Record<UserRole, { name: string; org: string; avatarBg: string }> = {
@@ -38,7 +36,7 @@ export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModa
 
   return (
     <header className="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-40 select-none">
-      {/* Top micro bar for Hackathon indicator & BCV */}
+      {/* Top micro bar: estado y tasa BCV */}
       <div className="bg-slate-950/80 px-4 py-1.5 border-b border-slate-800/80 flex flex-wrap items-center justify-end text-xs text-slate-400 gap-2">
         <div className="flex items-center gap-4 text-xs">
           {isCloudSynced && (
@@ -60,14 +58,6 @@ export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModa
           >
             <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
             <span>Tasa BCV Oficial: <strong>{bcvRate.toFixed(2)} Bs/$</strong></span>
-          </button>
-
-          <button
-            onClick={() => setShowPitchModal(true)}
-            className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:brightness-110 shadow-sm transition"
-          >
-            <Award className="w-3.5 h-3.5" />
-            <span>Pitch 60s</span>
           </button>
         </div>
       </div>
@@ -121,14 +111,7 @@ export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModa
 
         {/* Right: Notifications & Current User Profile */}
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setShowPitchModal(true)}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
-            title="Guía y Guion de Presentación"
-          >
-            <HelpCircle className="w-4 h-4" />
-          </button>
-          <button 
+          <button
             className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg relative transition"
             title="Notificaciones operativas"
           >

@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- NEXOCARGA: Esquema Relacional SQL Completo + Datos Semilla (Seed Data)
--- Proyecto Hackatón ValenValley 2026: Logística & Cadena de Suministro
+-- Proyecto NexoCarga: Logística & Cadena de Suministro B2B
 -- Compatible con Supabase (PostgreSQL 15+)
 -- ==============================================================================
 
@@ -111,7 +111,7 @@ ALTER TABLE almacenes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE inventario_depositado ENABLE ROW LEVEL SECURITY;
 ALTER TABLE despachos ENABLE ROW LEVEL SECURITY;
 
--- Políticas de lectura y escritura anónima para visualización pública en el Hackatón
+-- Políticas de lectura y escritura anónima para visualización pública de la demo
 CREATE POLICY "Lectura pública usuarios" ON usuarios FOR SELECT USING (true);
 CREATE POLICY "Escritura pública usuarios" ON usuarios FOR INSERT WITH CHECK (true);
 

@@ -7,8 +7,7 @@ import {
   Truck,
   ShieldCheck,
   Lock,
-  Layers,
-  Sparkles
+  Layers
 } from 'lucide-react';
 
 type NavItem = {
@@ -20,7 +19,7 @@ type NavItem = {
 };
 
 export const Sidebar: React.FC = () => {
-  const { role, activeTab, setActiveTab, totalEscrowBalance, bcvRate, setShowPitchModal, warehouses, inventory } = useNexo();
+  const { role, activeTab, setActiveTab, totalEscrowBalance, bcvRate, warehouses, inventory } = useNexo();
 
   // Navegación adaptada a cada perfil: cada rol ve solo las secciones que le competen.
   const navByRole: Record<typeof role, NavItem[]> = {
@@ -100,22 +99,6 @@ export const Sidebar: React.FC = () => {
           })}
         </nav>
 
-        {/* Pitch banner card */}
-        <div className="mx-3 mt-6 p-3 rounded-xl bg-gradient-to-br from-blue-950/60 to-slate-900 border border-blue-900/40">
-          <div className="flex items-center gap-2 text-xs font-bold text-blue-300 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>ValenValley 2026</span>
-          </div>
-          <p className="text-[11px] text-slate-400 leading-relaxed mb-2.5">
-            Economía colaborativa para galpones ociosos (+45%) en Venezuela.
-          </p>
-          <button
-            onClick={() => setShowPitchModal(true)}
-            className="w-full py-1.5 px-2 bg-blue-600 hover:bg-blue-500 text-white rounded text-[11px] font-bold transition shadow-sm"
-          >
-            Ver Pitch Ejecutivo (60s)
-          </button>
-        </div>
       </div>
 
       {/* Bottom Custodia Activa Badge */}

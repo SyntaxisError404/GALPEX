@@ -29,8 +29,6 @@ interface NexoContextType {
   selectedWarehouseForReservation: Warehouse | null;
   setSelectedWarehouseForReservation: (wh: Warehouse | null) => void;
   escrowTransactions: EscrowTransaction[];
-  showPitchModal: boolean;
-  setShowPitchModal: (show: boolean) => void;
   activeReceptionReceipt: StoredLot | null;
   setActiveReceptionReceipt: (lot: StoredLot | null) => void;
   isCloudSynced: boolean;
@@ -122,7 +120,6 @@ export const NexoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [bcvRate, setBcvRate] = useState<number>(36.45);
   const [selectedWarehouseForReservation, setSelectedWarehouseForReservation] = useState<Warehouse | null>(INITIAL_WAREHOUSES[0]);
   const [escrowTransactions, setEscrowTransactions] = useState<EscrowTransaction[]>(INITIAL_ESCROW_TXS);
-  const [showPitchModal, setShowPitchModal] = useState<boolean>(false);
   const [activeReceptionReceipt, setActiveReceptionReceipt] = useState<StoredLot | null>(null);
   const [isCloudSynced, setIsCloudSynced] = useState<boolean>(isSupabaseConfigured);
 
@@ -449,8 +446,6 @@ export const NexoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         selectedWarehouseForReservation,
         setSelectedWarehouseForReservation,
         escrowTransactions,
-        showPitchModal,
-        setShowPitchModal,
         activeReceptionReceipt,
         setActiveReceptionReceipt,
         isCloudSynced,

@@ -86,7 +86,7 @@ export const NexoBot: React.FC = () => {
                 role: 'user',
                 parts: [
                   {
-                    text: `Eres NexoBot Copiloto, asesor logístico experto de NexoCarga para Venezuela (Hackatón ValenValley 2026). Responde de forma concisa, profesional y con datos concretos venezolanos (Zonas industriales de Valencia, San Diego, Los Guayos, Caracas; Código de Comercio, Guías SADA/SICA, Escrow en USD con tasa oficial BCV, y protocolo de 4 candados). Pregunta: ${query}`
+                    text: `Eres NexoBot Copiloto, asesor logístico experto de NexoCarga para Venezuela. Responde de forma concisa, profesional y con datos concretos venezolanos (Zonas industriales de Valencia, San Diego, Los Guayos, Caracas; Código de Comercio, Guías SADA/SICA, Escrow en USD con tasa oficial BCV, y protocolo de 4 candados). Pregunta: ${query}`
                   }
                 ]
               }

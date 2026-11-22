@@ -9,7 +9,6 @@ import { DispatchView } from './components/dispatch/DispatchView';
 import { EscrowVaultView } from './components/escrow/EscrowVaultView';
 import { CarrierDashboard } from './components/carrier/CarrierDashboard';
 import { NexoBot } from './components/chatbot/NexoBot';
-import { PitchModal } from './components/modals/PitchModal';
 import { BcvRateModal } from './components/modals/BcvRateModal';
 import { ReceptionReceiptModal } from './components/provider/ReceptionReceiptModal';
 
@@ -53,9 +52,6 @@ const MainAppContent: React.FC = () => {
 
       {/* Floating NexoBot Copiloto — se reinicia con el saludo correcto al cambiar de perfil */}
       <NexoBot key={role} />
-
-      {/* Pitch Modal */}
-      <PitchModal />
 
       {/* BCV Rate Adjustment Modal */}
       <BcvRateModal isOpen={showBcvModal} onClose={() => setShowBcvModal(false)} />
