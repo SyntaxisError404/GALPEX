@@ -1,6 +1,6 @@
 -- ==============================================================================
--- NEXOCARGA: Esquema Relacional SQL Completo + Datos Semilla (Seed Data)
--- Proyecto NexoCarga: Logística & Cadena de Suministro B2B
+-- KARGON: Esquema Relacional SQL Completo + Datos Semilla (Seed Data)
+-- Proyecto KARGON: Logística & Cadena de Suministro B2B
 -- Compatible con Supabase (PostgreSQL 15+)
 -- ==============================================================================
 

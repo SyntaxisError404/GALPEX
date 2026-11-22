@@ -52,7 +52,7 @@ export const Sidebar: React.FC = () => {
           </div>
           <div>
             <div className="text-base font-extrabold text-white tracking-tight flex items-center gap-1.5">
-              <span>NexoCarga</span>
+              <span>KARGON</span>
             </div>
             <div className="text-[10px] uppercase font-bold text-blue-400 tracking-wider">
               Logística B2B

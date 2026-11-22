@@ -36,7 +36,7 @@ export const NexoBot: React.FC = () => {
     ? `${hi} Detecté que el Lote SKU-8841 de TecnoParts vence en 48h. El Depósito Anti-Abandono de $30 cubre el flete de retorno automático si no retiran a tiempo, protegiendo tu espacio sin pérdidas.`
     : role === 'transportista'
     ? `${hi} Tienes asignado el despacho #NX-8492 hacia Ferretería El Tornillo en Naguanagua con tarifa garantizada en Escrow ($85 USD). ¿Deseas verificar la ruta o escanear QR de retiro?`
-    : `${firstName ? '¡Hola ' + firstName + '!' : '¡Hola!'} Soy tu Copiloto Logístico NexoCarga. Puedes consultarme sobre cotizaciones por paleta, disponibilidad en Castillito o San Diego, o cómo funciona el depósito de garantía en custodia Escrow.`;
+    : `${firstName ? '¡Hola ' + firstName + '!' : '¡Hola!'} Soy tu Copiloto Logístico KARGON. Puedes consultarme sobre cotizaciones por paleta, disponibilidad en Castillito o San Diego, o cómo funciona el depósito de garantía en custodia Escrow.`;
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -90,7 +90,7 @@ export const NexoBot: React.FC = () => {
                 role: 'user',
                 parts: [
                   {
-                    text: `Eres NexoBot Copiloto, asesor logístico experto de NexoCarga para Venezuela. Responde de forma concisa, profesional y con datos concretos venezolanos (Zonas industriales de Valencia, San Diego, Los Guayos, Caracas; Código de Comercio, Guías SADA/SICA, Escrow en USD con tasa oficial BCV, y protocolo de 4 candados). Pregunta: ${query}`
+                    text: `Eres NexoBot Copiloto, asesor logístico experto de KARGON para Venezuela. Responde de forma concisa, profesional y con datos concretos venezolanos (Zonas industriales de Valencia, San Diego, Los Guayos, Caracas; Código de Comercio, Guías SADA/SICA, Escrow en USD con tasa oficial BCV, y protocolo de 4 candados). Pregunta: ${query}`
                   }
                 ]
               }
@@ -293,7 +293,7 @@ export const NexoBot: React.FC = () => {
             </div>
 
             <p className="text-slate-500 leading-relaxed">
-              NexoCarga ya funciona 100% de manera autónoma con su motor de intenciones en TypeScript. Si deseas habilitar IA generativa abierta para consultas complejas, ingresa tu <code className="text-blue-700 bg-blue-50 px-1 py-0.5 rounded">VITE_GEMINI_API_KEY</code>.
+              KARGON ya funciona 100% de manera autónoma con su motor de intenciones en TypeScript. Si deseas habilitar IA generativa abierta para consultas complejas, ingresa tu <code className="text-blue-700 bg-blue-50 px-1 py-0.5 rounded">VITE_GEMINI_API_KEY</code>.
             </p>
 
             <div>

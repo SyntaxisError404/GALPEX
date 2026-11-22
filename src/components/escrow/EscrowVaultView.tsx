@@ -159,7 +159,7 @@ export const EscrowVaultView: React.FC = () => {
           </div>
 
           <p className="text-[11px] text-slate-500 leading-relaxed">
-            Ejemplo real: al confirmarse la entrega por QR, los fondos retenidos se dispersan automáticamente a cada actor. NexoCarga solo cobra el 10% de comisión.
+            Ejemplo real: al confirmarse la entrega por QR, los fondos retenidos se dispersan automáticamente a cada actor. KARGON solo cobra el 10% de comisión.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
@@ -176,7 +176,7 @@ export const EscrowVaultView: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
-              <div className="text-[10px] font-bold text-emerald-800 uppercase">NEXOCARGA (10%)</div>
+              <div className="text-[10px] font-bold text-emerald-800 uppercase">KARGON (10%)</div>
               <div className="text-lg font-black text-emerald-900 font-mono">$15.00</div>
               <div className="text-[11px] text-emerald-800">Comisión por custodia, software y SADA.</div>
             </div>

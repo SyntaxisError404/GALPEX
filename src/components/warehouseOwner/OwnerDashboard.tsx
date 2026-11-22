@@ -453,7 +453,7 @@ export const OwnerDashboard: React.FC = () => {
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 font-mono">
                 <div className="flex justify-between"><span>Base Imponible Almacenaje:</span><strong>$1,840.00 USD</strong></div>
                 <div className="flex justify-between text-slate-500"><span>Equivalente BCV:</span><strong>{(1840 * bcvRate).toLocaleString()} Bs.</strong></div>
-                <div className="flex justify-between"><span>Comisión NexoCarga (10%):</span><strong>$184.00 USD</strong></div>
+                <div className="flex justify-between"><span>Comisión KARGON (10%):</span><strong>$184.00 USD</strong></div>
                 <div className="flex justify-between"><span>Retención ISLR Estimada (2%):</span><strong>$36.80 USD</strong></div>
               </div>
 

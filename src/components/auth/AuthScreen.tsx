@@ -97,7 +97,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ initialMode = 'login', o
             <Layers className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-xl font-extrabold text-white tracking-tight">NexoCarga</div>
+            <div className="text-xl font-extrabold text-white tracking-tight">KARGON</div>
             <div className="text-[10px] uppercase font-bold text-blue-400 tracking-wider">Logística B2B · Venezuela</div>
           </div>
         </div>
