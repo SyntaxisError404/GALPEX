@@ -194,11 +194,12 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
     // Control de Zoom en posición superior derecha
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // Capa de mosaicos oscura estilo Command Center (CartoDB Dark Matter sobre OpenStreetMap)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a> • KARGON Satelital',
-      subdomains: 'abcd',
-      maxZoom: 20,
+    // Capa de mosaicos de OpenStreetMap (gratis, sin API key). El aspecto oscuro
+    // estilo Command Center se logra con un filtro CSS sobre la capa de tiles
+    // (ver .kargon-map .leaflet-tile-pane en index.css), evitando depender de CARTO.
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors • KARGON Satelital',
+      maxZoom: 19,
     }).addTo(map);
 
     // Trazar Ruta resaltada sobre la ARC
@@ -410,7 +411,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
 
       {/* Contenedor del Mapa Leaflet con OpenStreetMap */}
       <div className="relative w-full" style={{ height }}>
-        <div ref={mapContainerRef} className="w-full h-full z-0" />
+        <div ref={mapContainerRef} className="kargon-map w-full h-full z-0" />
 
         {/* Tarjeta Flotante Informativa: Telemetría de la Carga */}
         <div className="absolute top-3 left-3 z-[400] max-w-xs bg-slate-900/90 backdrop-blur-md text-white p-3.5 rounded-xl border border-slate-700 shadow-xl pointer-events-auto">

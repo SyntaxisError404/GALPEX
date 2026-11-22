@@ -24,3 +24,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Mapa estilo Command Center oscuro: filtro CSS sobre los tiles de OpenStreetMap
+   (no afecta pines, rutas ni popups, que viven en otras capas de Leaflet). */
+.kargon-map {
+  background: #0b1120;
+}
+.kargon-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.75);
+}
