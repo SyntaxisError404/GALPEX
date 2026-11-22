@@ -12,7 +12,8 @@ import {
   ShieldCheck,
   AlertCircle,
   LogIn,
-  UserPlus
+  UserPlus,
+  ArrowLeft
 } from 'lucide-react';
 
 const ROLE_OPTIONS: { id: UserRole; label: string; desc: string; icon: typeof Package; color: string }[] = [
@@ -27,9 +28,14 @@ const DEMO_ACCOUNTS = [
   { email: 'transportista@nexocarga.com', label: 'Transportista' }
 ];
 
-export const AuthScreen: React.FC = () => {
+interface AuthScreenProps {
+  initialMode?: 'login' | 'register';
+  onBack?: () => void;
+}
+
+export const AuthScreen: React.FC<AuthScreenProps> = ({ initialMode = 'login', onBack }) => {
   const { login, register, usesSupabase } = useAuth();
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
   const [busy, setBusy] = useState(false);
@@ -76,6 +82,15 @@ export const AuthScreen: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a1128] via-slate-900 to-slate-950 p-4">
       <div className="w-full max-w-md">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white mb-4 transition"
+          >
+            <ArrowLeft className="w-4 h-4" /> Volver al inicio
+          </button>
+        )}
+
         {/* Marca */}
         <div className="flex items-center justify-center gap-3 mb-6">
           <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 via-blue-500 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">

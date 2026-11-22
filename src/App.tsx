@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NexoProvider, useNexo } from './context/NexoContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AuthScreen } from './components/auth/AuthScreen';
+import { LandingScreen } from './components/landing/LandingScreen';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { WelcomeGuide } from './components/layout/WelcomeGuide';
@@ -69,9 +70,11 @@ const MainAppContent: React.FC = () => {
   );
 };
 
-// Decide qué mostrar según la sesión: pantalla de login o la app con el rol del usuario.
+// Decide qué mostrar: landing pública → login/registro → app con el rol del usuario.
 const AuthedApp: React.FC = () => {
   const { currentUser, loading } = useAuth();
+  const [view, setView] = useState<'landing' | 'auth'>('landing');
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
   if (loading) {
     return (
@@ -85,7 +88,15 @@ const AuthedApp: React.FC = () => {
   }
 
   if (!currentUser) {
-    return <AuthScreen />;
+    if (view === 'auth') {
+      return <AuthScreen initialMode={authMode} onBack={() => setView('landing')} />;
+    }
+    return (
+      <LandingScreen
+        onLogin={() => { setAuthMode('login'); setView('auth'); }}
+        onRegister={() => { setAuthMode('register'); setView('auth'); }}
+      />
+    );
   }
 
   return (
