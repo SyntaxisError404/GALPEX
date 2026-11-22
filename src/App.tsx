@@ -1,0 +1,82 @@
+import React, { useState } from 'react';
+import { NexoProvider, useNexo } from './context/NexoContext';
+import { Navbar } from './components/layout/Navbar';
+import { Sidebar } from './components/layout/Sidebar';
+import { WelcomeGuide } from './components/layout/WelcomeGuide';
+import { WarehouseCatalog } from './components/provider/WarehouseCatalog';
+import { OwnerDashboard } from './components/warehouseOwner/OwnerDashboard';
+import { DispatchView } from './components/dispatch/DispatchView';
+import { EscrowVaultView } from './components/escrow/EscrowVaultView';
+import { CarrierDashboard } from './components/carrier/CarrierDashboard';
+import { NexoBot } from './components/chatbot/NexoBot';
+import { PitchModal } from './components/modals/PitchModal';
+import { BcvRateModal } from './components/modals/BcvRateModal';
+import { ReceptionReceiptModal } from './components/provider/ReceptionReceiptModal';
+
+const MainAppContent: React.FC = () => {
+  const { role, activeTab, activeReceptionReceipt, setActiveReceptionReceipt } = useNexo();
+  const [showBcvModal, setShowBcvModal] = useState(false);
+
+  const renderCurrentView = () => {
+    // If user is in transportista role and exploring, show Carrier dashboard
+    if (role === 'transportista' && activeTab === 'explorar') {
+      return <CarrierDashboard />;
+    }
+
+    switch (activeTab) {
+      case 'explorar':
+        return <WarehouseCatalog />;
+      case 'inventario':
+        return <OwnerDashboard />;
+      case 'despachos':
+        return <DispatchView />;
+      case 'escrow':
+        return <EscrowVaultView />;
+      default:
+        return <WarehouseCatalog />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 font-sans">
+      {/* Top Navbar */}
+      <Navbar onOpenBcvModal={() => setShowBcvModal(true)} />
+
+      {/* Main Layout: Sidebar + View */}
+      <div className="flex-1 flex flex-col md:flex-row min-w-0">
+        <Sidebar />
+        <main className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
+          <WelcomeGuide />
+          {renderCurrentView()}
+        </main>
+      </div>
+
+      {/* Floating NexoBot Copiloto — se reinicia con el saludo correcto al cambiar de perfil */}
+      <NexoBot key={role} />
+
+      {/* Pitch Modal */}
+      <PitchModal />
+
+      {/* BCV Rate Adjustment Modal */}
+      <BcvRateModal isOpen={showBcvModal} onClose={() => setShowBcvModal(false)} />
+
+      {/* Reception Receipt Modal if active */}
+      {activeReceptionReceipt && (
+        <ReceptionReceiptModal
+          lot={activeReceptionReceipt}
+          onClose={() => setActiveReceptionReceipt(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+export function App() {
+  return (
+    <NexoProvider>
+      <MainAppContent />
+    </NexoProvider>
+  );
+}
+
+export default App;
