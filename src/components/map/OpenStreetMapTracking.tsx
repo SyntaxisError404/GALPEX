@@ -194,10 +194,11 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
     // Control de Zoom en posición superior derecha
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // Capa de mosaicos oficial de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors • KARGON Satelital',
-      maxZoom: 19,
+    // Capa de mosaicos oscura estilo Command Center (CartoDB Dark Matter sobre OpenStreetMap)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a> • KARGON Satelital',
+      subdomains: 'abcd',
+      maxZoom: 20,
     }).addTo(map);
 
     // Trazar Ruta resaltada sobre la ARC
@@ -248,7 +249,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
             </div>
 
             <div style="display: flex; align-items: center; gap: 4px; color: #0284c7; font-size: 10px; font-weight: 700;">
-              <span>🛡️ Galpón Auditado con CCTV y Art. 535 C.Com</span>
+              <span>Galpón Auditado con CCTV y Art. 535 C.Com</span>
             </div>
           </div>
         `;
@@ -289,7 +290,7 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
         <div style="color: #475569; margin-top: 2px;">Chofer: <strong>Pedro Alvarado</strong></div>
         <div style="color: #475569;">Vehículo: <strong>Chevrolet NPR 4.5T (Placas A38CD2K)</strong></div>
         <div style="margin-top: 4px; padding: 4px; background: #eff6ff; border-radius: 4px; color: #1e40af; font-size: 10px;">
-          🟢 Telemetría GPS enlazada por red celular 4G
+          Telemetría GPS enlazada por red celular 4G
         </div>
       </div>
     `);
