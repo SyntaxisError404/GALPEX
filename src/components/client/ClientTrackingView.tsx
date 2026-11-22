@@ -17,7 +17,7 @@ import {
 
 export const ClientTrackingView: React.FC = () => {
   const { currentUser } = useAuth();
-  const { dispatch, simulateStep3Delivery } = useNexo();
+  const { dispatch, simulateStep2Pickup, simulateStep3Delivery } = useNexo();
 
   const carrier = dispatch.assignedCarrier;
   const picked = dispatch.step2CarrierPickup.completed;
@@ -187,6 +187,14 @@ export const ClientTrackingView: React.FC = () => {
                     </p>
                   </div>
                 </div>
+                <button
+                  type="button"
+                  onClick={simulateStep2Pickup}
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-slate-300 text-sm font-medium text-slate-700 hover:bg-slate-50 transition"
+                >
+                  <Truck className="w-4 h-4" /> Simular retiro del transportista
+                </button>
+                <p className="mt-2 text-[11px] text-slate-400 text-center">Modo demo: en uso real lo hace el transportista.</p>
               </section>
             )}
 
