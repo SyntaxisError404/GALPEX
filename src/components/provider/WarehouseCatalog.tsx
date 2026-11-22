@@ -193,7 +193,7 @@ export const WarehouseCatalog: React.FC = () => {
     setShowOnboardingModal
   } = useNexo();
 
-  const [selectedLocation, setSelectedLocation] = useState<string>(cargoProfile?.preferredZone || 'all');
+  const [selectedLocation, setSelectedLocation] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<CargoCategory>(cargoProfile?.productType || 'repuestos_ferreteria');
   const [estimatedPallets, setEstimatedPallets] = useState<number>(cargoProfile?.estimatedPallets || 50);
   const [contractDays, setContractDays] = useState<number>(15);
@@ -201,17 +201,16 @@ export const WarehouseCatalog: React.FC = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'pagomovil' | 'transferencia' | 'zelle'>('pagomovil');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Control para mostrar u ocultar galpones incompatibles tras responder la encuesta
-  const [showAllWarehouses, setShowAllWarehouses] = useState<boolean>(false);
+  // El proveedor ve el catálogo COMPLETO por defecto (todos los galpones del país,
+  // compatibles primero). Puede filtrar a "Solo Aptos" con el toggle si lo desea.
+  const [showAllWarehouses, setShowAllWarehouses] = useState<boolean>(true);
   const [selectedIncompatibleWh, setSelectedIncompatibleWh] = useState<Warehouse | null>(null);
 
-  // Sync state if cargo profile updates
+  // Sincroniza el rubro y volumen con el perfil de carga, pero NO limita la zona:
+  // el catálogo arranca mostrando todas las ubicaciones para verlo completo.
   React.useEffect(() => {
     if (cargoProfile) {
       setSelectedCategory(cargoProfile.productType);
-      if (cargoProfile.preferredZone && cargoProfile.preferredZone !== 'all') {
-        setSelectedLocation(cargoProfile.preferredZone);
-      }
       if (cargoProfile.estimatedPallets) {
         setEstimatedPallets(cargoProfile.estimatedPallets);
       }
