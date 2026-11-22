@@ -30,10 +30,15 @@ const DEMO_ACCOUNTS = [
 
 interface AuthScreenProps {
   initialMode?: 'login' | 'register';
+  initialRole?: UserRole;
   onBack?: () => void;
 }
 
-export const AuthScreen: React.FC<AuthScreenProps> = ({ initialMode = 'login', onBack }) => {
+export const AuthScreen: React.FC<AuthScreenProps> = ({ 
+  initialMode = 'login', 
+  initialRole = 'proveedor', 
+  onBack 
+}) => {
   const { login, register, usesSupabase } = useAuth();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [error, setError] = useState('');
@@ -45,7 +50,15 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ initialMode = 'login', o
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
-  const [role, setRole] = useState<UserRole>('proveedor');
+  const [role, setRole] = useState<UserRole>(initialRole);
+
+  React.useEffect(() => {
+    if (initialRole) setRole(initialRole);
+  }, [initialRole]);
+
+  React.useEffect(() => {
+    if (initialMode) setMode(initialMode);
+  }, [initialMode]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

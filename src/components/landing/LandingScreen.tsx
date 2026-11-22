@@ -1,4 +1,5 @@
 import React from 'react';
+import type { UserRole } from '../../types';
 import {
   Layers,
   QrCode,
@@ -13,7 +14,7 @@ import {
 
 interface LandingScreenProps {
   onLogin: () => void;
-  onRegister: () => void;
+  onRegister: (role?: UserRole) => void;
 }
 
 const NAV_LINKS = [
@@ -91,7 +92,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
               Iniciar Sesión
             </button>
             <button
-              onClick={onRegister}
+              onClick={() => onRegister()}
               className="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-emerald-500/20 transition"
             >
               Registrar Empresa
@@ -153,15 +154,15 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
         {/* Llamado final a registrarse por rol */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
           {[
-            { icon: Package, label: 'Soy Proveedor' },
-            { icon: Building2, label: 'Tengo un Galpón' },
-            { icon: Truck, label: 'Soy Transportista' }
+            { icon: Package, label: 'Soy Proveedor', role: 'proveedor' as const },
+            { icon: Building2, label: 'Tengo un Galpón', role: 'dueno_galpon' as const },
+            { icon: Truck, label: 'Soy Transportista', role: 'transportista' as const }
           ].map(r => {
             const Icon = r.icon;
             return (
               <button
                 key={r.label}
-                onClick={onRegister}
+                onClick={() => onRegister(r.role)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 text-xs font-bold text-slate-200 transition"
               >
                 <Icon className="w-4 h-4 text-blue-400" />

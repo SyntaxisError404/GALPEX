@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NexoProvider, useNexo } from './context/NexoContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import type { UserRole } from './types';
 import { AuthScreen } from './components/auth/AuthScreen';
 import { LandingScreen } from './components/landing/LandingScreen';
 import { Navbar } from './components/layout/Navbar';
@@ -93,6 +94,7 @@ const AuthedApp: React.FC = () => {
   const { currentUser, loading } = useAuth();
   const [view, setView] = useState<'landing' | 'auth'>('landing');
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const [selectedRole, setSelectedRole] = useState<UserRole>('proveedor');
 
   if (loading) {
     return (
@@ -107,12 +109,22 @@ const AuthedApp: React.FC = () => {
 
   if (!currentUser) {
     if (view === 'auth') {
-      return <AuthScreen initialMode={authMode} onBack={() => setView('landing')} />;
+      return (
+        <AuthScreen
+          initialMode={authMode}
+          initialRole={selectedRole}
+          onBack={() => setView('landing')}
+        />
+      );
     }
     return (
       <LandingScreen
         onLogin={() => { setAuthMode('login'); setView('auth'); }}
-        onRegister={() => { setAuthMode('register'); setView('auth'); }}
+        onRegister={(roleToSet?: UserRole) => {
+          setAuthMode('register');
+          if (roleToSet) setSelectedRole(roleToSet);
+          setView('auth');
+        }}
       />
     );
   }
