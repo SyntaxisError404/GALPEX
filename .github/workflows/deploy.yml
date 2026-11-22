@@ -24,10 +24,13 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Modo DEMO: sin claves de Supabase, el login usa el modo local del navegador
+      # (cualquier correo se registra al instante). Para reactivar Supabase, descomenta
+      # el bloque env de abajo (los secretos ya están guardados en el repo).
       - run: npm run build
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        # env:
+        #   VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+        #   VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
