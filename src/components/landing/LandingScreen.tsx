@@ -4,7 +4,6 @@ import {
   QrCode,
   ShieldCheck,
   Scale,
-  TrendingUp,
   ArrowRight,
   ChevronDown,
   Building2,
@@ -88,11 +87,6 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px]">
-              <span className="text-[8px] font-bold text-emerald-400 bg-emerald-500/15 px-1.5 py-0.5 rounded">Nuevo</span>
-              <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-slate-300">Tasa BCV: <strong className="text-amber-300">Bs. 36.45</strong></span>
-            </div>
             <button onClick={onLogin} className="hidden sm:inline text-xs font-bold text-slate-200 hover:text-white transition">
               Iniciar Sesión
             </button>

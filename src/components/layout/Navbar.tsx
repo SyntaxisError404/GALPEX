@@ -3,7 +3,6 @@ import { useNexo } from '../../context/NexoContext';
 import { useAuth } from '../../context/AuthContext';
 import type { UserRole } from '../../types';
 import {
-  RotateCcw,
   Bell,
   TrendingUp,
   ShieldCheck,
@@ -19,7 +18,7 @@ const ROLE_META: Record<UserRole, { label: string; badge: string; avatarBg: stri
 };
 
 export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModal }) => {
-  const { bcvRate, resetDemoData, isCloudSynced } = useNexo();
+  const { bcvRate, isCloudSynced } = useNexo();
   const { currentUser, logout } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -56,20 +55,11 @@ export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModa
 
       {/* Main Navbar Bar */}
       <div className="px-4 py-2.5 flex items-center justify-between gap-4">
-        {/* Left: Rol del usuario + reiniciar demo */}
+        {/* Left: Rol del usuario */}
         <div className="flex items-center gap-3">
           <span className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${meta.badge}`}>
             {meta.label}
           </span>
-
-          <button
-            onClick={resetDemoData}
-            title="Reiniciar datos de prueba a valores iniciales"
-            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-300 bg-slate-800/60 hover:bg-slate-700 border border-slate-700 rounded-md transition"
-          >
-            <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
-            <span>Reiniciar Demo</span>
-          </button>
         </div>
 
         {/* Right: Notificaciones y perfil con sesión */}
