@@ -7,7 +7,8 @@ type TabId = 'explorar' | 'inventario' | 'despachos' | 'escrow';
 const ROLE_TABS: Record<UserRole, { home: TabId; allowed: TabId[] }> = {
   proveedor: { home: 'explorar', allowed: ['explorar', 'despachos', 'escrow'] },
   dueno_galpon: { home: 'inventario', allowed: ['inventario', 'despachos', 'escrow'] },
-  transportista: { home: 'explorar', allowed: ['explorar', 'despachos', 'escrow'] }
+  transportista: { home: 'explorar', allowed: ['explorar', 'despachos', 'escrow'] },
+  cliente: { home: 'despachos', allowed: ['despachos'] }
 };
 import { INITIAL_WAREHOUSES } from '../data/warehouses';
 import { INITIAL_INVENTORY } from '../data/inventory';

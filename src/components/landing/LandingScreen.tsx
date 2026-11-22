@@ -9,7 +9,8 @@ import {
   ChevronDown,
   Building2,
   Package,
-  Truck
+  Truck,
+  Store
 } from 'lucide-react';
 
 interface LandingScreenProps {
@@ -48,7 +49,8 @@ const FEATURES = [
 const AUDIENCES = [
   { dot: 'bg-blue-400', label: 'Proveedores e Importadores' },
   { dot: 'bg-emerald-400', label: 'Dueños de Galpones y Patios' },
-  { dot: 'bg-amber-400', label: 'Flotas y Transportistas Certificados' }
+  { dot: 'bg-amber-400', label: 'Flotas y Transportistas Certificados' },
+  { dot: 'bg-purple-400', label: 'Comercios y Receptores Finales' }
 ];
 
 export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegister }) => {
@@ -156,7 +158,8 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onLogin, onRegiste
           {[
             { icon: Package, label: 'Soy Proveedor', role: 'proveedor' as const },
             { icon: Building2, label: 'Tengo un Galpón', role: 'dueno_galpon' as const },
-            { icon: Truck, label: 'Soy Transportista', role: 'transportista' as const }
+            { icon: Truck, label: 'Soy Transportista', role: 'transportista' as const },
+            { icon: Store, label: 'Soy Cliente / Receptor', role: 'cliente' as const }
           ].map(r => {
             const Icon = r.icon;
             return (

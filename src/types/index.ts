@@ -1,10 +1,14 @@
-export type UserRole = 'proveedor' | 'dueno_galpon' | 'transportista';
+export type UserRole = 'proveedor' | 'dueno_galpon' | 'transportista' | 'cliente';
 
-// Cuenta de usuario de la app (demo: se guarda en el navegador vía localStorage).
+// Cuenta de usuario formal de la app (con RIF, representante legal, cédula y teléfono obligatorios).
 export interface AppUser {
   id: string;
   name: string;
   company: string;
+  rif?: string;
+  legalRepName?: string;
+  legalRepCi?: string;
+  phone?: string;
   email: string;
   password: string;
   role: UserRole;

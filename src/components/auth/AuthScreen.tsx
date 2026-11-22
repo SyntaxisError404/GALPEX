@@ -13,19 +13,24 @@ import {
   AlertCircle,
   LogIn,
   UserPlus,
-  ArrowLeft
+  ArrowLeft,
+  FileSpreadsheet,
+  Phone,
+  Store
 } from 'lucide-react';
 
 const ROLE_OPTIONS: { id: UserRole; label: string; desc: string; icon: typeof Package; color: string }[] = [
   { id: 'proveedor', label: 'Proveedor', desc: 'Reservo espacio y despacho mi mercancía', icon: Package, color: 'blue' },
   { id: 'dueno_galpon', label: 'Dueño de Galpón', desc: 'Monetizo el espacio ocioso de mi galpón', icon: Building2, color: 'emerald' },
-  { id: 'transportista', label: 'Transportista', desc: 'Realizo fletes verificados y cobro seguro', icon: Truck, color: 'amber' }
+  { id: 'transportista', label: 'Transportista', desc: 'Realizo fletes verificados y cobro seguro', icon: Truck, color: 'amber' },
+  { id: 'cliente', label: 'Cliente / Receptor', desc: 'Recibo mercancía, sigo el flete en vivo y contacto al chofer', icon: Store, color: 'purple' }
 ];
 
 const DEMO_ACCOUNTS = [
   { email: 'proveedor@nexocarga.com', label: 'Proveedor' },
   { email: 'galpon@nexocarga.com', label: 'Dueño de Galpón' },
-  { email: 'transportista@nexocarga.com', label: 'Transportista' }
+  { email: 'transportista@nexocarga.com', label: 'Transportista' },
+  { email: 'cliente@nexocarga.com', label: 'Cliente Receptor' }
 ];
 
 interface AuthScreenProps {
@@ -45,11 +50,15 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   const [info, setInfo] = useState('');
   const [busy, setBusy] = useState(false);
 
-  // Campos
+  // Campos obligatorios fiscales y legales de la empresa y contacto
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
+  const [rif, setRif] = useState('');
+  const [legalRepName, setLegalRepName] = useState('');
+  const [legalRepCi, setLegalRepCi] = useState('');
+  const [phone, setPhone] = useState('');
   const [role, setRole] = useState<UserRole>(initialRole);
 
   React.useEffect(() => {
@@ -74,7 +83,17 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     setBusy(true);
     setError('');
     setInfo('');
-    const res = await register({ name, company, email, password, role });
+    const res = await register({ 
+      name, 
+      company, 
+      rif, 
+      legalRepName, 
+      legalRepCi, 
+      phone, 
+      email, 
+      password, 
+      role 
+    });
     setBusy(false);
     if (!res.ok) setError(res.error || 'No se pudo crear la cuenta.');
     else if (res.info) { setInfo(res.info); setMode('login'); }
@@ -168,7 +187,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                     <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
                       Cuentas de prueba (clic para rellenar)
                     </div>
-                    <div className="grid grid-cols-3 gap-1.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                       {DEMO_ACCOUNTS.map(acc => (
                         <button
                           key={acc.email}
@@ -191,14 +210,26 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               </form>
             ) : (
               <form onSubmit={handleRegister} className="space-y-3.5">
-                <Field icon={User} label="Nombre completo" value={name} onChange={setName} placeholder="ej. Ana Pérez" />
-                <Field icon={Building2} label="Empresa (opcional)" value={company} onChange={setCompany} placeholder="ej. Distribuidora XYZ C.A." />
-                <Field icon={Mail} label="Correo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" />
-                <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
+                <Field icon={Building2} label="Empresa o Comercio (Razón Social)" value={company} onChange={setCompany} placeholder="ej. Ferretería El Tornillo C.A." />
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <Field icon={FileSpreadsheet} label="RIF de la Empresa" value={rif} onChange={setRif} placeholder="ej. J-31098234-9" />
+                  <Field icon={Phone} label="Teléfono / WhatsApp" value={phone} onChange={setPhone} placeholder="ej. +58 414-2391092" />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <Field icon={User} label="Representante Legal" value={legalRepName} onChange={setLegalRepName} placeholder="ej. Manuel Mendoza" />
+                  <Field icon={ShieldCheck} label="Cédula de Identidad" value={legalRepCi} onChange={setLegalRepCi} placeholder="ej. V-14.829.102" />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <Field icon={Mail} label="Correo Corporativo" type="email" value={email} onChange={setEmail} placeholder="tucorreo@empresa.com" />
+                  <Field icon={Lock} label="Contraseña" type="password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
+                </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1.5">¿Qué rol usarás?</label>
-                  <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-700 block mb-1.5">¿Qué rol usarás en KARGON?</label>
+                  <div className="grid grid-cols-1 gap-2">
                     {ROLE_OPTIONS.map(opt => {
                       const Icon = opt.icon;
                       const active = role === opt.id;
@@ -233,7 +264,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   disabled={busy}
                   className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition"
                 >
-                  <UserPlus className="w-4 h-4" /> {busy ? 'Creando...' : 'Crear cuenta y entrar'}
+                  <UserPlus className="w-4 h-4" /> {busy ? 'Creando cuenta auditada...' : 'Crear cuenta y entrar'}
                 </button>
               </form>
             )}

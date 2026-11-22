@@ -37,6 +37,9 @@ export const Sidebar: React.FC = () => {
       { id: 'explorar' as const, label: 'Mis Viajes Asignados', icon: Truck, highlight: true },
       { id: 'despachos' as const, label: 'Despachos & QR', icon: Package },
       { id: 'escrow' as const, label: 'Pagos Escrow', icon: ShieldCheck }
+    ],
+    cliente: [
+      { id: 'despachos' as const, label: 'Rastreo de Carga', icon: Truck, highlight: true }
     ]
   };
 

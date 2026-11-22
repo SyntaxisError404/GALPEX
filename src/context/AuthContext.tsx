@@ -5,22 +5,75 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 const USERS_KEY = 'nexo_users';
 const SESSION_KEY = 'nexo_session_user_id';
 
-// Cuentas de demostración (solo para el modo local sin Supabase).
+// Cuentas de demostración con datos fiscales y legales completos para cada actor del ecosistema
 const DEMO_USERS: AppUser[] = [
-  { id: 'usr-demo-proveedor', name: 'Sofía Rojas', company: 'TecnoParts C.A.', email: 'proveedor@nexocarga.com', password: 'demo123', role: 'proveedor' },
-  { id: 'usr-demo-galpon', name: 'Manuel Mendoza', company: 'Logística Castillito C.A.', email: 'galpon@nexocarga.com', password: 'demo123', role: 'dueno_galpon' },
-  { id: 'usr-demo-transportista', name: 'Pedro Alvarado', company: 'Trans-Carabobo Express', email: 'transportista@nexocarga.com', password: 'demo123', role: 'transportista' }
+  { 
+    id: 'usr-demo-proveedor', 
+    name: 'Sofía Rojas', 
+    company: 'TecnoParts C.A.', 
+    rif: 'J-29837192-3',
+    legalRepName: 'Sofía Rojas',
+    legalRepCi: 'V-18.421.902',
+    phone: '+58 414-2391092',
+    email: 'proveedor@nexocarga.com', 
+    password: 'demo123', 
+    role: 'proveedor' 
+  },
+  { 
+    id: 'usr-demo-galpon', 
+    name: 'Manuel Mendoza', 
+    company: 'Logística Castillito C.A.', 
+    rif: 'J-31098234-9',
+    legalRepName: 'Manuel Mendoza',
+    legalRepCi: 'V-14.829.102',
+    phone: '+58 414-4328901',
+    email: 'galpon@nexocarga.com', 
+    password: 'demo123', 
+    role: 'dueno_galpon' 
+  },
+  { 
+    id: 'usr-demo-transportista', 
+    name: 'Pedro Alvarado', 
+    company: 'Trans-Carabobo Express', 
+    rif: 'V-16829102-1',
+    legalRepName: 'Pedro Alvarado',
+    legalRepCi: 'V-16.829.102',
+    phone: '+58 412-8921092',
+    email: 'transportista@nexocarga.com', 
+    password: 'demo123', 
+    role: 'transportista' 
+  },
+  { 
+    id: 'usr-demo-cliente', 
+    name: 'Gustavo Morales', 
+    company: 'Ferretería El Tornillo C.A.', 
+    rif: 'J-40192831-5',
+    legalRepName: 'Gustavo Morales',
+    legalRepCi: 'V-12.983.412',
+    phone: '+58 424-9182390',
+    email: 'cliente@nexocarga.com', 
+    password: 'demo123', 
+    role: 'cliente' 
+  }
 ];
 
 interface Perfil {
   nombre_completo?: string;
   empresa?: string;
+  rif?: string;
+  representante_legal?: string;
+  cedula?: string;
+  telefono?: string;
   rol?: UserRole;
 }
 
 interface RegisterData {
   name: string;
   company: string;
+  rif?: string;
+  legalRepName?: string;
+  legalRepCi?: string;
+  phone?: string;
   email: string;
   password: string;
   role: UserRole;
@@ -170,6 +223,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: `usr-${Date.now()}`,
       name: data.name.trim(),
       company: data.company.trim() || 'Independiente',
+      rif: data.rif?.trim() || 'J-00000000-0',
+      legalRepName: data.legalRepName?.trim() || data.name.trim(),
+      legalRepCi: data.legalRepCi?.trim() || 'V-00000000',
+      phone: data.phone?.trim() || '+58 414-0000000',
       email: cleanEmail,
       password: data.password,
       role: data.role

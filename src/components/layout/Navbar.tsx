@@ -14,7 +14,8 @@ import {
 const ROLE_META: Record<UserRole, { label: string; badge: string; avatarBg: string }> = {
   proveedor: { label: 'Proveedor', badge: 'bg-blue-500/15 text-blue-300 border-blue-500/30', avatarBg: 'bg-blue-600' },
   dueno_galpon: { label: 'Dueño de Galpón', badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', avatarBg: 'bg-emerald-600' },
-  transportista: { label: 'Transportista', badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30', avatarBg: 'bg-amber-600' }
+  transportista: { label: 'Transportista', badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30', avatarBg: 'bg-amber-600' },
+  cliente: { label: 'Cliente Receptor', badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30', avatarBg: 'bg-purple-600' }
 };
 
 export const Navbar: React.FC<{ onOpenBcvModal: () => void }> = ({ onOpenBcvModal }) => {

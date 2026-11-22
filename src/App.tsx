@@ -12,6 +12,7 @@ import { OwnerDashboard } from './components/warehouseOwner/OwnerDashboard';
 import { DispatchView } from './components/dispatch/DispatchView';
 import { EscrowVaultView } from './components/escrow/EscrowVaultView';
 import { CarrierDashboard } from './components/carrier/CarrierDashboard';
+import { ClientTrackingView } from './components/client/ClientTrackingView';
 import { NexoBot } from './components/chatbot/NexoBot';
 import { BcvRateModal } from './components/modals/BcvRateModal';
 import { ReceptionReceiptModal } from './components/provider/ReceptionReceiptModal';
@@ -31,6 +32,11 @@ const MainAppContent: React.FC = () => {
   const [showBcvModal, setShowBcvModal] = useState(false);
 
   const renderCurrentView = () => {
+    // Si el usuario es el cliente/receptor final, mostrar su portal de seguimiento satelital y recepción
+    if (role === 'cliente') {
+      return <ClientTrackingView />;
+    }
+
     // If user is in transportista role and exploring, show Carrier dashboard
     if (role === 'transportista' && activeTab === 'explorar') {
       return <CarrierDashboard />;

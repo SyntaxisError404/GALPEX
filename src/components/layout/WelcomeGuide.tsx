@@ -36,6 +36,13 @@ const ROLE_GUIDE: Record<UserRole, {
       { icon: Compass, label: '2. Escanear QR', tab: 'despachos' },
       { icon: ShieldCheck, label: '3. Mi pago', tab: 'escrow' }
     ]
+  },
+  cliente: {
+    steps: [
+      { icon: Truck, label: '1. Rastrear flete en vivo', tab: 'despachos' },
+      { icon: Compass, label: '2. Contactar chofer (WhatsApp)', tab: 'despachos' },
+      { icon: ShieldCheck, label: '3. Firma QR al portón', tab: 'despachos' }
+    ]
   }
 };
 
