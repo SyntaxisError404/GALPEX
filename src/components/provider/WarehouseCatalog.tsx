@@ -15,8 +15,7 @@ import {
   ShieldAlert,
   Eye,
   CheckCircle2,
-  X,
-  Sparkles
+  X
 } from 'lucide-react';
 import { LegalFooterBanner } from '../layout/LegalFooterBanner';
 

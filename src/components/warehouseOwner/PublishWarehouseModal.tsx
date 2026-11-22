@@ -10,10 +10,8 @@ import {
   ShieldCheck,
   AlertTriangle,
   Upload,
-  Image as ImageIcon,
   DollarSign,
   Sparkles,
-  Zap,
   CheckCircle2,
   Lock
 } from 'lucide-react';
@@ -82,7 +80,6 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
   const [hasLeakProofRoof, setHasLeakProofRoof] = useState<boolean>(true);
   const [hasLevelFloor, setHasLevelFloor] = useState<boolean>(true);
   const [hasHeavyGate, setHasHeavyGate] = useState<boolean>(true);
-  const [hasGoodLighting, setHasGoodLighting] = useState<boolean>(true);
   const [hasPestControl, setHasPestControl] = useState<boolean>(true);
   const [conditionDescription, setConditionDescription] = useState<string>(
     'Galpón en óptimas condiciones, techo de acerolit sin goteras, piso de concreto pulido para montacargas, portón corredizo de 5m con acceso directo para gandolas.'
@@ -91,7 +88,6 @@ export const PublishWarehouseModal: React.FC<{ onClose: () => void }> = ({ onClo
   // Fotos de comprobación técnica (auditoría anti-mentiras)
   const [cctvProofPhoto, setCctvProofPhoto] = useState<string>('https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=400&q=80');
   const [roofProofPhoto, setRoofProofPhoto] = useState<string>('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80');
-  const [showVerificationInfo, setShowVerificationInfo] = useState<boolean>(true);
 
   // Tipos de mercancía aceptada
   const [selectedCategories, setSelectedCategories] = useState<CargoCategory[]>([

@@ -9,11 +9,8 @@ import {
   Pause,
   RotateCcw,
   Maximize2,
-  Layers,
-  MapPin,
   ShieldCheck,
   Clock,
-  Compass,
   Info
 } from 'lucide-react';
 
@@ -35,18 +32,6 @@ const ARC_ROUTE_COORDINATES: [number, number][] = [
   [10.0850, -67.4950], // La Encrucijada de Turmero
   [10.0550, -67.4890], // Entrada a Cagua
   [10.03132, -67.48301] // Destino Cliente: Cagua Zona Industrial (Coordenada exacta OSM)
-];
-
-// Puntos de control (Hitos) de la ruta para el tracking
-const ROUTE_WAYPOINTS = [
-  { name: 'Galpón Castillito Norte (Valencia)', km: 0, index: 0 },
-  { name: 'Distribuidor San Diego / Big Low', km: 4, index: 1 },
-  { name: 'Peaje Guacara', km: 12, index: 3 },
-  { name: 'San Joaquín', km: 23, index: 5 },
-  { name: 'Túnel La Cabrera / Límite Aragua', km: 38, index: 8 },
-  { name: 'Maracay - San Vicente', km: 46, index: 9 },
-  { name: 'La Encrucijada de Cagua', km: 62, index: 13 },
-  { name: 'Destino: Ferretería El Tornillo (Cagua)', km: 68, index: 15 }
 ];
 
 // Coordenadas geoespaciales de los galpones de la red KARGON
@@ -83,7 +68,6 @@ export const OpenStreetMapTracking: React.FC<OpenStreetMapTrackingProps> = ({
   const [selectedWarehouseId, setSelectedWarehouseId] = useState<string>('wh-castillito-norte');
 
   // Calcular telemetría en base al paso actual
-  const currentCoord = ARC_ROUTE_COORDINATES[currentStep] || ARC_ROUTE_COORDINATES[0];
   const progressPercent = Math.round((currentStep / (ARC_ROUTE_COORDINATES.length - 1)) * 100);
   const remainingKm = Math.max(0, Math.round((1 - currentStep / (ARC_ROUTE_COORDINATES.length - 1)) * 68));
   const remainingMinutes = Math.max(2, Math.round((remainingKm / 62) * 60));

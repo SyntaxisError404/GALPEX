@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNexo } from '../../context/NexoContext';
-import { X, Landmark, ShieldCheck, RefreshCw, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { X, Landmark, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export const BcvRateModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const { bcvRate, setBcvRate, bcvLastUpdated, bcvLoading, bcvSource, fetchLiveBcvRate } = useNexo();

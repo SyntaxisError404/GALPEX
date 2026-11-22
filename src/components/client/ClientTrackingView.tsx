@@ -3,7 +3,6 @@ import { useAuth } from '../../context/AuthContext';
 import { useNexo } from '../../context/NexoContext';
 import { OpenStreetMapTracking } from '../map/OpenStreetMapTracking';
 import {
-  Truck,
   MapPin,
   Phone,
   MessageSquare,
@@ -12,19 +11,14 @@ import {
   Clock,
   QrCode,
   FileText,
-  AlertTriangle,
-  Building2,
   Package,
-  Calendar,
-  Sparkles,
-  ArrowRight,
   ExternalLink
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const ClientTrackingView: React.FC = () => {
   const { currentUser } = useAuth();
-  const { dispatch, bcvRate } = useNexo();
+  const { dispatch } = useNexo();
   const [delivered, setDelivered] = useState(false);
   const [showQrModal, setShowQrModal] = useState(false);
   const [cargoCondition, setCargoCondition] = useState({

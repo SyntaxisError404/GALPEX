@@ -53,7 +53,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   // Campos obligatorios fiscales y legales de la empresa y contacto
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [rif, setRif] = useState('');
   const [legalRepName, setLegalRepName] = useState('');
@@ -83,10 +82,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     setBusy(true);
     setError('');
     setInfo('');
-    const res = await register({ 
-      name, 
-      company, 
-      rif, 
+    const res = await register({
+      name: legalRepName || company,
+      company,
+      rif,
       legalRepName, 
       legalRepCi, 
       phone, 

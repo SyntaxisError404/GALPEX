@@ -3,7 +3,6 @@ import type { CargoCategory, ProviderCargoProfile } from '../../types';
 import {
   ShieldCheck,
   CheckCircle2,
-  Package,
   Wrench,
   Utensils,
   ThermometerSnowflake,
